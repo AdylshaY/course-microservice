@@ -3,9 +3,13 @@ using Refit;
 using System.Net;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using MediatR;
 
 namespace CourseMicroservice.Shared
 {
+    public interface IRequestByServiceResult<T>: IRequest<ServiceResult<T>>;
+    public interface IRequestByServiceResult: IRequest<ServiceResult>;
+
     public class ServiceResult
     {
         [JsonIgnore]
@@ -85,8 +89,8 @@ namespace CourseMicroservice.Shared
                 StatusCode = HttpStatusCode.BadRequest,
                 Fail = new ProblemDetails()
                 {
-                    Title = "Validation errors occured.",
-                    Detail = "Please check the erros property for more details.",
+                    Title = "Validation errors occurred.",
+                    Detail = "Please check the errors property for more details.",
                     Status = HttpStatusCode.BadRequest.GetHashCode(),
                     Extensions = errors,
                 }
@@ -124,6 +128,8 @@ namespace CourseMicroservice.Shared
     public class ServiceResult<T> : ServiceResult
     {
         public T? Data { get; set; }
+        
+        [JsonIgnore] 
         public string? UrlAsCreated { get; set; }
 
         // 200 OK with data.

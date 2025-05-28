@@ -1,5 +1,7 @@
+using CourseMicroservice.Catalog.API;
+using CourseMicroservice.Catalog.API.Features.Categories;
+using CourseMicroservice.Catalog.API.Features.Courses;
 using CourseMicroservice.Catalog.API.Options;
-using CourseMicroservice.Catalog.API.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +10,18 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddOptionsExtension();
 builder.Services.AddDatabaseServiceExtension();
 
+builder.Services.AddCommonServiceExtension(typeof(CatalogAssembly));
+
 var app = builder.Build();
+
+
+app.AddSeedDataExtension().ContinueWith(x =>
+{
+    Console.WriteLine(x.IsFaulted ? x.Exception.Message : "Seed data has been saved successfully.");
+});
+
+app.AddCategoryGroupEndpointExtension();
+app.AddCourseGroupEndpointExtension();
 
 if (app.Environment.IsDevelopment())
 {

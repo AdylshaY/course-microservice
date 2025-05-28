@@ -1,0 +1,11 @@
+﻿global using AutoMapper;
+global using MediatR;
+global using Microsoft.EntityFrameworkCore;
+global using CourseMicroservice.Shared;
+global using CourseMicroservice.Shared.Extensions;
+global using MassTransit;
+global using System.Net;
+global using FluentValidation;
+global using CourseMicroservice.Catalog.API.Features.Categories.Dtos;
+global using CourseMicroservice.Catalog.API.Features.Courses.Dtos;
+global using CourseMicroservice.Catalog.API.Repositories;
