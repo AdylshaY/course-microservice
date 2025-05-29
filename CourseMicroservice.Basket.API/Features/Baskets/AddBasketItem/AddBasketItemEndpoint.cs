@@ -10,7 +10,7 @@ namespace CourseMicroservice.Basket.API.Features.Baskets.AddBasketItem
         {
             group.MapPost("/item", async (AddBasketItemCommand command, IMediator mediator) => (await mediator.Send(command)).ToGenericResult())
                 .WithName("AddBasketItem")
-                .AddEndpointFilter<ValidationFilter<AddBasketItemCommandValidator>>();
+                .AddEndpointFilter<ValidationFilter<AddBasketItemCommand>>();
 
             return group;
         }
