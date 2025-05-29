@@ -12,6 +12,8 @@ builder.Services.AddDatabaseServiceExtension();
 
 builder.Services.AddCommonServiceExtension(typeof(CatalogAssembly));
 
+builder.Services.AddApiVersionExtension();
+
 var app = builder.Build();
 
 
@@ -20,8 +22,8 @@ app.AddSeedDataExtension().ContinueWith(x =>
     Console.WriteLine(x.IsFaulted ? x.Exception.Message : "Seed data has been saved successfully.");
 });
 
-app.AddCategoryGroupEndpointExtension();
-app.AddCourseGroupEndpointExtension();
+app.AddCategoryGroupEndpointExtension(app.AddVersionSetExtension());
+app.AddCourseGroupEndpointExtension(app.AddVersionSetExtension());
 
 if (app.Environment.IsDevelopment())
 {

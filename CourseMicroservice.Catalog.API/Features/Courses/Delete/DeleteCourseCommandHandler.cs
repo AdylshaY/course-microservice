@@ -1,7 +1,7 @@
 ﻿
 namespace CourseMicroservice.Catalog.API.Features.Courses.Delete
 {
-    public class DeleteCourseCommandHandler(AppDbContext context, IMapper mapper) : IRequestHandler<DeleteCourseCommand, ServiceResult>
+    public class DeleteCourseCommandHandler(AppDbContext context) : IRequestHandler<DeleteCourseCommand, ServiceResult>
     {
         public async Task<ServiceResult> Handle(DeleteCourseCommand request, CancellationToken cancellationToken)
         {
