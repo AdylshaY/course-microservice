@@ -1,5 +1,7 @@
 ﻿using Asp.Versioning.Builder;
 using CourseMicroservice.Basket.API.Features.Baskets.AddBasketItem;
+using CourseMicroservice.Basket.API.Features.Baskets.DeleteBasketItem;
+using CourseMicroservice.Basket.API.Features.Baskets.GetBasket;
 
 namespace CourseMicroservice.Basket.API.Features.Baskets
 {
@@ -10,7 +12,9 @@ namespace CourseMicroservice.Basket.API.Features.Baskets
             app.MapGroup("api/v{version:apiVersion}/baskets")
                 .WithTags("Basket")
                 .WithApiVersionSet(apiVersionSet)
-                .AddBasketGroupItemEndpoint();
+                .AddBasketGroupItemEndpoint()
+                .DeleteBasketGroupItemEndpoint()
+                .GetBasketGroupItemEndpoint();
         }
     }
 }
