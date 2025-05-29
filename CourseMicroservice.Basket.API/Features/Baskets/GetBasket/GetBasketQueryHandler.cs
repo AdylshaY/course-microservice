@@ -1,4 +1,5 @@
-﻿using CourseMicroservice.Basket.API.Constants;
+﻿using AutoMapper;
+using CourseMicroservice.Basket.API.Constants;
 using CourseMicroservice.Basket.API.Dto;
 using CourseMicroservice.Shared;
 using CourseMicroservice.Shared.Services;
@@ -8,7 +9,7 @@ using System.Text.Json;
 
 namespace CourseMicroservice.Basket.API.Features.Baskets.GetBasket
 {
-    public class GetBasketQueryHandler(IDistributedCache distributedCache, IIdentityService identityService) : IRequestHandler<GetBasketQuery, ServiceResult<BasketDto>>
+    public class GetBasketQueryHandler(IDistributedCache distributedCache, IIdentityService identityService, IMapper mapper) : IRequestHandler<GetBasketQuery, ServiceResult<BasketDto>>
     {
         public async Task<ServiceResult<BasketDto>> Handle(GetBasketQuery request, CancellationToken cancellationToken)
         {
@@ -21,7 +22,9 @@ namespace CourseMicroservice.Basket.API.Features.Baskets.GetBasket
 
             var basket = JsonSerializer.Deserialize<BasketDto>(basketAsString);
 
-            return ServiceResult<BasketDto>.SuccessAsOk(basket!);
+            var basketDto = mapper.Map<BasketDto>(basket);
+
+            return ServiceResult<BasketDto>.SuccessAsOk(basketDto);
         }
     }
 }

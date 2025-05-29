@@ -1,5 +1,4 @@
 ﻿using CourseMicroservice.Basket.API.Constants;
-using CourseMicroservice.Basket.API.Dto;
 using CourseMicroservice.Shared;
 using CourseMicroservice.Shared.Services;
 using MediatR;
@@ -17,17 +16,17 @@ namespace CourseMicroservice.Basket.API.Features.Baskets.AddBasketItem
 
             var basketAsString = await distributedCache.GetStringAsync(cacheKey, cancellationToken);
 
-            BasketDto? currentBasket;
-            var newBasketItem = new BasketItemDto(request.CourseId, request.CourseName, request.ImageUrl, request.CoursePrice, null);
+            Data.Basket? currentBasket;
+            var newBasketItem = new Data.BasketItem(request.CourseId, request.CourseName, request.ImageUrl, request.CoursePrice, null);
 
             if (string.IsNullOrEmpty(basketAsString))
             {
-                currentBasket = new BasketDto(userId, [newBasketItem]);
+                currentBasket = new Data.Basket(userId, [newBasketItem]);
                 await CreateCacheAsync(currentBasket, cacheKey, cancellationToken);
                 return ServiceResult.SuccessAsNoContent();
             }
 
-            currentBasket = JsonSerializer.Deserialize<BasketDto>(basketAsString);
+            currentBasket = JsonSerializer.Deserialize<Data.Basket>(basketAsString);
             var existingBasketItem = currentBasket!.BasketItemList.FirstOrDefault(x => x.Id == request.CourseId);
 
             if (existingBasketItem is not null)
@@ -42,7 +41,7 @@ namespace CourseMicroservice.Basket.API.Features.Baskets.AddBasketItem
             return ServiceResult.SuccessAsNoContent();
         }
 
-        private async Task CreateCacheAsync(BasketDto basketDto, string cacheKey, CancellationToken cancellationToken)
+        private async Task CreateCacheAsync(Data.Basket basketDto, string cacheKey, CancellationToken cancellationToken)
         {
 
             var basketAsString = JsonSerializer.Serialize(basketDto);

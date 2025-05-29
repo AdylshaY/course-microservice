@@ -19,7 +19,7 @@ namespace CourseMicroservice.Basket.API.Features.Baskets.DeleteBasketItem
 
             if (string.IsNullOrEmpty(basketAsString)) return ServiceResult.Error("Basket not found.", System.Net.HttpStatusCode.NotFound);
 
-            var currentBasket = JsonSerializer.Deserialize<BasketDto>(basketAsString);
+            var currentBasket = JsonSerializer.Deserialize<Data.Basket>(basketAsString);
 
             var basketItemToDelete = currentBasket!.BasketItemList.FirstOrDefault(x => x.Id == request.CourseId);
 
