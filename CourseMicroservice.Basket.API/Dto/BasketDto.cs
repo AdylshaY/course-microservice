@@ -5,19 +5,20 @@ namespace CourseMicroservice.Basket.API.Dto
     public record BasketDto
     {
         [JsonIgnore]
-        public Guid UserId { get; init; }
+        public bool IsAppliedDiscountRate => DiscountRate is > 0 && !string.IsNullOrEmpty(Coupon);
 
         public List<BasketItemDto> BasketItemList { get; init; }
 
-        public BasketDto(Guid userId, List<BasketItemDto> basketItemList)
-        {
-            UserId = userId;
-            BasketItemList = basketItemList;
-        }
+        public float? DiscountRate { get; set; }
+        public string? Coupon { get; set; }
 
-        public BasketDto()
+        public decimal TotalPrice => BasketItemList.Sum(item => item.Price);
+
+        public decimal? TotalPriceWithAppliedDiscount => !IsAppliedDiscountRate ? null : BasketItemList.Sum(item => item.PriceByAppliedDiscountRate);
+
+        public BasketDto(List<BasketItemDto> basketItemList)
         {
-            
+            BasketItemList = basketItemList;
         }
     };
 }

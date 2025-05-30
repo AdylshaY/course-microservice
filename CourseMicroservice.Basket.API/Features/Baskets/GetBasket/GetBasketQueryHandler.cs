@@ -1,22 +1,16 @@
 ﻿using AutoMapper;
-using CourseMicroservice.Basket.API.Constants;
 using CourseMicroservice.Basket.API.Dto;
 using CourseMicroservice.Shared;
-using CourseMicroservice.Shared.Services;
 using MediatR;
-using Microsoft.Extensions.Caching.Distributed;
 using System.Text.Json;
 
 namespace CourseMicroservice.Basket.API.Features.Baskets.GetBasket
 {
-    public class GetBasketQueryHandler(IDistributedCache distributedCache, IIdentityService identityService, IMapper mapper) : IRequestHandler<GetBasketQuery, ServiceResult<BasketDto>>
+    public class GetBasketQueryHandler(IMapper mapper, BasketService basketService) : IRequestHandler<GetBasketQuery, ServiceResult<BasketDto>>
     {
         public async Task<ServiceResult<BasketDto>> Handle(GetBasketQuery request, CancellationToken cancellationToken)
         {
-            Guid userId = identityService.GetUserId;
-
-            var cacheKey = string.Format(BasketConstants.BasketCacheKey, userId);
-            var basketAsString = await distributedCache.GetStringAsync(cacheKey, token: cancellationToken);
+            var basketAsString = await basketService.GetBasketFromCache(cancellationToken);
 
             if (basketAsString is null) return ServiceResult<BasketDto>.Error("Basket not found.", System.Net.HttpStatusCode.NotFound);
 
