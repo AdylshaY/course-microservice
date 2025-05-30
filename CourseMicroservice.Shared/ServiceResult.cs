@@ -230,5 +230,10 @@ namespace CourseMicroservice.Shared
                 Fail = problemDetails,
             };
         }
+
+        public object ToActionResult()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

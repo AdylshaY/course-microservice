@@ -1,4 +1,5 @@
 using CourseMicroservice.Discount.API;
+using CourseMicroservice.Discount.API.Features.Discounts;
 using CourseMicroservice.Discount.API.Options;
 using CourseMicroservice.Discount.API.Repositories;
 
@@ -16,6 +17,8 @@ builder.Services.AddCommonServiceExtension(typeof(DiscountAssembly));
 builder.Services.AddApiVersionExtension();
 
 var app = builder.Build();
+
+app.AddDiscountGroupEndpointExtension(app.AddVersionSetExtension());
 
 if (app.Environment.IsDevelopment())
 {

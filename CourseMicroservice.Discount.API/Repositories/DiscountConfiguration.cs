@@ -1,11 +1,12 @@
 ﻿using CourseMicroservice.Discount.API.Features.Discounts;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MongoDB.EntityFrameworkCore.Extensions;
 
 namespace CourseMicroservice.Discount.API.Repositories
 {
     public class DiscountConfiguration : IEntityTypeConfiguration<DiscountEntity>
     {
-        public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<DiscountEntity> builder)
+        public void Configure(EntityTypeBuilder<DiscountEntity> builder)
         {
             builder.ToCollection("discounts");
             builder.HasKey(x => x.Id);
