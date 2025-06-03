@@ -1,4 +1,5 @@
-﻿using CourseMicroservice.File.API.Features.File.Upload;
+﻿using CourseMicroservice.File.API.Features.File.Delete;
+using CourseMicroservice.File.API.Features.File.Upload;
 
 namespace CourseMicroservice.File.API.Features.File
 {
@@ -9,7 +10,8 @@ namespace CourseMicroservice.File.API.Features.File
             app.MapGroup("api/v{version:apiVersion}/files")
                 .WithTags("files")
                 .WithApiVersionSet(apiVersionSet)
-                .UploadFileGroupItemEndpoint();
+                .UploadFileGroupItemEndpoint()
+                .DeleteFileGroupItemEndpoint();
         }
     }
 }
