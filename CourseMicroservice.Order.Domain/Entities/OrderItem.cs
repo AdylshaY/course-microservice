@@ -43,7 +43,7 @@
                 throw new ArgumentOutOfRangeException(nameof(discountPercentage), "Discount percentage must be between 0 and 100.");
             }
 
-            UnitPrice -= UnitPrice * (discountPercentage / 100);
+            UnitPrice -= UnitPrice * ((decimal)discountPercentage / 100);
         }
 
         public bool IsSameItem(OrderItem otherItem)
