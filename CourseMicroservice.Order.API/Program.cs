@@ -1,11 +1,18 @@
+using CourseMicroservice.Order.API.Endpoints.Orders;
 using CourseMicroservice.Order.Application.Contracts.Repositories;
+using CourseMicroservice.Order.Application.Contracts.UnitOfWork;
 using CourseMicroservice.Order.Persistence;
 using CourseMicroservice.Order.Persistence.Repositories;
+using CourseMicroservice.Order.Persistence.UnitOfWork;
+using CourseMicroservice.Shared.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddApiVersionExtension();
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(option =>
 {
@@ -13,12 +20,18 @@ builder.Services.AddDbContext<AppDbContext>(option =>
 });
 
 builder.Services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
+
+app.AddOrderGroupEndpointExtension(app.AddVersionSetExtension());
 
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
