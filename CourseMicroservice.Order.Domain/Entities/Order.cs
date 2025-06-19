@@ -21,7 +21,7 @@ namespace CourseMicroservice.Order.Domain.Entities
             var random = new Random();
             var orderCode = new StringBuilder(10);
 
-            for(int i = 0; i < 10; i++)
+            for (int i = 0; i < 10; i++)
             {
                 orderCode.Append(random.Next(0, 10));
             }
@@ -61,6 +61,12 @@ namespace CourseMicroservice.Order.Domain.Entities
         public void AddOrderItem(Guid productId, string productName, decimal unitPrice)
         {
             var orderItem = new OrderItem();
+
+            if (DiscountRate.HasValue)
+            {
+                unitPrice -= unitPrice * (decimal)(DiscountRate.Value / 100);
+            }
+
             orderItem.SetItem(productId, productName, unitPrice);
             OrderItemList.Add(orderItem);
             CalculateTotalPrice();
@@ -89,10 +95,6 @@ namespace CourseMicroservice.Order.Domain.Entities
         private void CalculateTotalPrice()
         {
             TotalPrice = OrderItemList.Sum(item => item.UnitPrice);
-            if (DiscountRate.HasValue)
-            {
-                TotalPrice -= TotalPrice * (decimal)(DiscountRate.Value / 100);
-            }
         }
     }
 

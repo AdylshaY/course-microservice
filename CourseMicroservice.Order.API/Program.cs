@@ -1,4 +1,5 @@
 using CourseMicroservice.Order.API.Endpoints.Orders;
+using CourseMicroservice.Order.Application;
 using CourseMicroservice.Order.Application.Contracts.Repositories;
 using CourseMicroservice.Order.Application.Contracts.UnitOfWork;
 using CourseMicroservice.Order.Persistence;
@@ -13,7 +14,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddApiVersionExtension();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddCommonServiceExtension(typeof(OrderApplicationAssembly));
 builder.Services.AddDbContext<AppDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));

@@ -1,5 +1,6 @@
 ﻿using CourseMicroservice.Order.Application.Features.Orders.Create;
 using CourseMicroservice.Shared.Extensions;
+using CourseMicroservice.Shared.Filters;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,7 +12,8 @@ public static class CreateOrderEndpoint
     {
         group.MapPost("/", async ([FromBody] CreateOrderCommand command, [FromServices] IMediator mediator) => (await mediator.Send(command)).ToGenericResult())
             .WithName("CreateOrder")
-            .MapToApiVersion(1, 0);
+            .MapToApiVersion(1, 0)
+            .AddEndpointFilter<ValidationFilter<CreateOrderCommand>>();
 
         return group;
     }
