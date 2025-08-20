@@ -1,6 +1,6 @@
 @baseAddress = http://localhost:5220
 
-POST {{baseAddress}}/api/v1/payments
+POST {{baseAddress}}/v1/payments
 Content-Type: application/json
 Accept: application/json
 {
@@ -9,11 +9,11 @@ Accept: application/json
   "CardHolderName": "John Doe",
   "CardExpirationDate": "12/25",
   "CardSecurityNumber": "123",
-  "Amount": 150.75
+  "Amount": 99.99
 }
 ###
 
-GET {{baseAddress}}/api/v1/payments
+GET {{baseAddress}}/v1/payments
 Content-Type: application/json
 Accept: application/json
 ###
