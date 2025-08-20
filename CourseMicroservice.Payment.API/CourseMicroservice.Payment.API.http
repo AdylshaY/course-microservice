@@ -1,0 +1,20 @@
+@baseAddress = http://localhost:5129
+
+POST {{baseAddress}}/api/v1/payments
+Content-Type: application/json
+Accept: application/json
+{
+  "OrderCode": "5ddb5f6b-32b3-46a1-92e2-15043821c291",
+  "CardNumber": "4111111111111111",
+  "CardHolderName": "John Doe",
+  "CardExpirationDate": "12/25",
+  "CardSecurityNumber": "123",
+  "Amount": 150.75
+}
+###
+
+GET {{baseAddress}}/api/v1/payments
+Content-Type: application/json
+Accept: application/json
+###
+

@@ -45,6 +45,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseMicroservice.Order.Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseMicroservice.Order.Persistence", "CourseMicroservice.Order.Persistence\CourseMicroservice.Order.Persistence.csproj", "{9229565E-4E80-4C11-B366-A898D900C329}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "payment", "payment", "{3398267F-E778-4C49-BD11-6AE965834B4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseMicroservice.Payment.API", "CourseMicroservice.Payment.API\CourseMicroservice.Payment.API.csproj", "{1607B62F-B9DC-40B7-880F-5429F2703092}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +95,10 @@ Global
 		{9229565E-4E80-4C11-B366-A898D900C329}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9229565E-4E80-4C11-B366-A898D900C329}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9229565E-4E80-4C11-B366-A898D900C329}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1607B62F-B9DC-40B7-880F-5429F2703092}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1607B62F-B9DC-40B7-880F-5429F2703092}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1607B62F-B9DC-40B7-880F-5429F2703092}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1607B62F-B9DC-40B7-880F-5429F2703092}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -115,6 +123,8 @@ Global
 		{5976C104-54C9-4BA4-B51E-BD1C5E16AD10} = {52C4B9F3-14A0-4254-90BA-0B878A49BF30}
 		{B73C79EC-57FF-4E8D-8C7A-C5C39BB73B64} = {52C4B9F3-14A0-4254-90BA-0B878A49BF30}
 		{9229565E-4E80-4C11-B366-A898D900C329} = {249B40D8-BFA1-4457-BBC8-5F6F8F409C57}
+		{3398267F-E778-4C49-BD11-6AE965834B4E} = {0AF89A25-BD8A-477B-BA4F-3DD35DC9570D}
+		{1607B62F-B9DC-40B7-880F-5429F2703092} = {3398267F-E778-4C49-BD11-6AE965834B4E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E4D223B9-A956-43EF-B4CE-5A63780C7A37}
