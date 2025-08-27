@@ -53,6 +53,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gateway", "gateway", "{5A3E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseMicroservice.Gateway", "CourseMicroservice.Gateway\CourseMicroservice.Gateway.csproj", "{5CEC2087-20FA-4492-AAD0-B800125B187B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "keycloak-clients", "keycloak-clients", "{D59BA526-C02D-466C-B3A0-775BF0D18A5C}"
+	ProjectSection(SolutionItems) = preProject
+		keycloak-clients\Basket.API.json = keycloak-clients\Basket.API.json
+		keycloak-clients\Catalog.API.json = keycloak-clients\Catalog.API.json
+		keycloak-clients\Discount.API.json = keycloak-clients\Discount.API.json
+		keycloak-clients\File.API.json = keycloak-clients\File.API.json
+		keycloak-clients\Order.API.json = keycloak-clients\Order.API.json
+		keycloak-clients\Payment.API.json = keycloak-clients\Payment.API.json
+		keycloak-clients\Web.json = keycloak-clients\Web.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
