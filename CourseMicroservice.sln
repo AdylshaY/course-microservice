@@ -61,6 +61,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "keycloak-clients", "keycloa
 		keycloak-clients\File.API.json = keycloak-clients\File.API.json
 		keycloak-clients\Order.API.json = keycloak-clients\Order.API.json
 		keycloak-clients\Payment.API.json = keycloak-clients\Payment.API.json
+		keycloak-clients\realm-export.json = keycloak-clients\realm-export.json
 		keycloak-clients\Web.json = keycloak-clients\Web.json
 	EndProjectSection
 EndProject
