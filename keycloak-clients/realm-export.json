@@ -47,6 +47,15 @@
   "roles": {
     "realm": [
       {
+        "id": "e717f752-e7dd-4630-ac9e-4f0795d3ee3f",
+        "name": "instructor",
+        "description": "instructor",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "6adac78a-5132-430d-95e2-1ffddc8570b0",
+        "attributes": {}
+      },
+      {
         "id": "ef0a3d7f-3e49-4372-8000-656ce8206f40",
         "name": "default-roles-coursetenant",
         "description": "${role_default-roles}",
@@ -1539,6 +1548,7 @@
       "defaultClientScopes": [
         "web-origins",
         "acr",
+        "phone",
         "profile",
         "roles",
         "basic",
@@ -1546,7 +1556,6 @@
       ],
       "optionalClientScopes": [
         "address",
-        "phone",
         "offline_access",
         "microprofile-jwt"
       ]
@@ -1894,6 +1903,23 @@
             "id.token.claim": "true",
             "access.token.claim": "true",
             "claim.name": "given_name",
+            "jsonType.label": "String"
+          }
+        },
+        {
+          "id": "590a69f0-ebd0-41d5-becc-ad5641b51a01",
+          "name": "city mapper",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-attribute-mapper",
+          "consentRequired": false,
+          "config": {
+            "introspection.token.claim": "true",
+            "userinfo.token.claim": "true",
+            "user.attribute": "city",
+            "id.token.claim": "true",
+            "lightweight.claim": "false",
+            "access.token.claim": "true",
+            "claim.name": "city",
             "jsonType.label": "String"
           }
         },
