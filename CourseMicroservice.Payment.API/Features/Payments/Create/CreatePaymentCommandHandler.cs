@@ -10,8 +10,6 @@ namespace CourseMicroservice.Payment.API.Features.Payments.Create
         public async Task<ServiceResult<Guid>> Handle(CreatePaymentCommand request, CancellationToken cancellationToken)
         {
             var userId = identityService.UserId;
-            var userName = identityService.UserName;
-            var roles = identityService.Roles;
 
             var (isSuccess, errorMessage) = await ExternalPaymentProcessAsync(request.CardNumber, request.CardHolderName, request.CardExpirationDate, request.CardSecurityNumber, request.Amount);
 
