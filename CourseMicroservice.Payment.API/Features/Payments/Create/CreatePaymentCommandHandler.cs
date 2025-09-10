@@ -5,10 +5,12 @@ using MediatR;
 
 namespace CourseMicroservice.Payment.API.Features.Payments.Create
 {
-    public class CreatePaymentCommandHandler(AppDbContext appDbContext, IIdentityService identityService) : IRequestHandler<CreatePaymentCommand, ServiceResult<Guid>>
+    public class CreatePaymentCommandHandler(AppDbContext appDbContext, IHttpContextAccessor httpContextAccessor, IIdentityService identityService) : IRequestHandler<CreatePaymentCommand, ServiceResult<Guid>>
     {
         public async Task<ServiceResult<Guid>> Handle(CreatePaymentCommand request, CancellationToken cancellationToken)
         {
+            var claims = httpContextAccessor.HttpContext.User.Claims;
+
             var (isSuccess, errorMessage) = await ExternalPaymentProcessAsync(request.CardNumber, request.CardHolderName, request.CardExpirationDate, request.CardSecurityNumber, request.Amount);
 
             if (!isSuccess) return ServiceResult<Guid>.Error("Payment Failed", errorMessage, System.Net.HttpStatusCode.BadRequest);

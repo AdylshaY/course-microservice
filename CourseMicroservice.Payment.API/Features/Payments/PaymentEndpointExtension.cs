@@ -13,7 +13,7 @@ namespace CourseMicroservice.Payment.API.Features.Payments
                 .WithApiVersionSet(apiVersionSet)
                 .CreatePaymentGroupItemEndpoint()
                 .GetAllPaymentByUserIdGroupItemEndpoint()
-                .RequireAuthorization();
+                .RequireAuthorization("Password");
         }
     }
 }
