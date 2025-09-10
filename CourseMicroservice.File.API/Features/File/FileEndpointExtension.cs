@@ -11,7 +11,8 @@ namespace CourseMicroservice.File.API.Features.File
                 .WithTags("files")
                 .WithApiVersionSet(apiVersionSet)
                 .UploadFileGroupItemEndpoint()
-                .DeleteFileGroupItemEndpoint();
+                .DeleteFileGroupItemEndpoint()
+                .RequireAuthorization();
         }
     }
 }

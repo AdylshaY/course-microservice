@@ -14,6 +14,8 @@ builder.Services.AddCommonServiceExtension(typeof(CatalogAssembly));
 
 builder.Services.AddApiVersionExtension();
 
+builder.Services.AddAuthenticationAndAuthorizationExtension(builder.Configuration);
+
 var app = builder.Build();
 
 
@@ -30,5 +32,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.Run();

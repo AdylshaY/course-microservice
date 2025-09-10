@@ -16,6 +16,8 @@ builder.Services.AddStackExchangeRedisCache(options =>
 
 builder.Services.AddApiVersionExtension();
 
+builder.Services.AddAuthenticationAndAuthorizationExtension(builder.Configuration);
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -25,5 +27,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.AddBasketGroupEndpointExtension(app.AddVersionSetExtension());
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.Run();

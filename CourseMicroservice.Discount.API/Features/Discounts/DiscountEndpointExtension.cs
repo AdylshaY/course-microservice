@@ -12,7 +12,8 @@ namespace CourseMicroservice.Discount.API.Features.Discounts
                 .WithTags("discounts")
                 .WithApiVersionSet(apiVersionSet)
                 .CreateDiscountGroupItemEndpoint()
-                .GetDiscountByCodeGroupItemEndpoint();
+                .GetDiscountByCodeGroupItemEndpoint()
+                .RequireAuthorization();
         }
     }
 }
