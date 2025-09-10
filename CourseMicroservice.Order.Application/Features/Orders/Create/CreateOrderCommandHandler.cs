@@ -23,7 +23,7 @@ public class CreateOrderCommandHandler(IOrderRepository orderRepository, IIdenti
             Line = request.Address.Line
         };
 
-        var order = Domain.Entities.Order.CreateUnPaidOrder(identityService.GetUserId, request.DiscountRate, address.Id);
+        var order = Domain.Entities.Order.CreateUnPaidOrder(identityService.UserId, request.DiscountRate, address.Id);
 
         foreach (var orderItem in request.Items)
         {

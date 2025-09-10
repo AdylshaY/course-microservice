@@ -11,7 +11,7 @@ public class GetOrderListQueryHandler(IIdentityService identityService, IOrderRe
 {
     public async Task<ServiceResult<List<GetOrderListQueryResponse>>> Handle(GetOrderListQuery request, CancellationToken cancellationToken)
     {
-        var orderList = await orderRepository.GetOrderListByUserId(identityService.GetUserId);
+        var orderList = await orderRepository.GetOrderListByUserId(identityService.UserId);
 
         var response = orderList.Select(x => new GetOrderListQueryResponse(x.Created, x.TotalPrice, mapper.Map<List<OrderItemDto>>(x.OrderItemList))).ToList();
 

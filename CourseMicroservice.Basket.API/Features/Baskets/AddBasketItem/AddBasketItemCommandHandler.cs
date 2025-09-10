@@ -16,7 +16,7 @@ namespace CourseMicroservice.Basket.API.Features.Baskets.AddBasketItem
 
             if (string.IsNullOrEmpty(basketAsString))
             {
-                currentBasket = new Data.Basket(identityService.GetUserId, [newBasketItem]);
+                currentBasket = new Data.Basket(identityService.UserId, [newBasketItem]);
                 await basketService.CreateBasketCacheAsync(currentBasket, cancellationToken);
                 return ServiceResult.SuccessAsNoContent();
             }
