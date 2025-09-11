@@ -1,3 +1,4 @@
+using CourseMicroservice.Bus;
 using CourseMicroservice.File.API;
 using CourseMicroservice.File.API.Features.File;
 
@@ -13,6 +14,7 @@ builder.Services.AddCommonServiceExtension(typeof(FileAssembly));
 builder.Services.AddApiVersionExtension();
 
 builder.Services.AddAuthenticationAndAuthorizationExtension(builder.Configuration);
+builder.Services.AddMasstransitExtension(builder.Configuration);
 
 var app = builder.Build();
 

@@ -1,3 +1,4 @@
+using CourseMicroservice.Bus;
 using CourseMicroservice.Order.API.Endpoints.Orders;
 using CourseMicroservice.Order.Application;
 using CourseMicroservice.Order.Application.Contracts.Repositories;
@@ -25,6 +26,7 @@ builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddAuthenticationAndAuthorizationExtension(builder.Configuration);
+builder.Services.AddMasstransitExtension(builder.Configuration);
 
 var app = builder.Build();
 

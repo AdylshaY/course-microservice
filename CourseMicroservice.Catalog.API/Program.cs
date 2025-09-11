@@ -1,3 +1,4 @@
+using CourseMicroservice.Bus;
 using CourseMicroservice.Catalog.API;
 using CourseMicroservice.Catalog.API.Features.Categories;
 using CourseMicroservice.Catalog.API.Features.Courses;
@@ -15,6 +16,7 @@ builder.Services.AddCommonServiceExtension(typeof(CatalogAssembly));
 builder.Services.AddApiVersionExtension();
 
 builder.Services.AddAuthenticationAndAuthorizationExtension(builder.Configuration);
+builder.Services.AddMasstransitExtension(builder.Configuration);
 
 var app = builder.Build();
 

@@ -1,3 +1,4 @@
+using CourseMicroservice.Bus;
 using CourseMicroservice.Payment.API;
 using CourseMicroservice.Payment.API.Features.Payments;
 using CourseMicroservice.Payment.API.Repositories;
@@ -18,6 +19,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 
 builder.Services.AddAuthenticationAndAuthorizationExtension(builder.Configuration);
+builder.Services.AddMasstransitExtension(builder.Configuration);
 
 var app = builder.Build();
 

@@ -1,5 +1,6 @@
 using CourseMicroservice.Basket.API;
 using CourseMicroservice.Basket.API.Features.Baskets;
+using CourseMicroservice.Bus;
 using CourseMicroservice.Shared.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,7 @@ builder.Services.AddStackExchangeRedisCache(options =>
 builder.Services.AddApiVersionExtension();
 
 builder.Services.AddAuthenticationAndAuthorizationExtension(builder.Configuration);
+builder.Services.AddMasstransitExtension(builder.Configuration);
 
 var app = builder.Build();
 
