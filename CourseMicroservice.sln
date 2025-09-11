@@ -20,6 +20,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "basket", "basket", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseMicroservice.Basket.API", "CourseMicroservice.Basket.API\CourseMicroservice.Basket.API.csproj", "{1FD78B42-26EF-4ABA-A319-9657E2BDC64F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{39DB7141-C7A2-4A92-BAEB-8DEB4CBFDAE4} = {39DB7141-C7A2-4A92-BAEB-8DEB4CBFDAE4}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "discount", "discount", "{422F76B8-A6C0-4335-9BB9-B6127D959CF0}"
 EndProject
@@ -64,6 +67,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "keycloak-clients", "keycloa
 		keycloak-clients\realm-export.json = keycloak-clients\realm-export.json
 		keycloak-clients\Web.json = keycloak-clients\Web.json
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseMicroservice.Bus", "CourseMicroservice.Bus\CourseMicroservice.Bus.csproj", "{39DB7141-C7A2-4A92-BAEB-8DEB4CBFDAE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -119,6 +124,10 @@ Global
 		{5CEC2087-20FA-4492-AAD0-B800125B187B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5CEC2087-20FA-4492-AAD0-B800125B187B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5CEC2087-20FA-4492-AAD0-B800125B187B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39DB7141-C7A2-4A92-BAEB-8DEB4CBFDAE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39DB7141-C7A2-4A92-BAEB-8DEB4CBFDAE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39DB7141-C7A2-4A92-BAEB-8DEB4CBFDAE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39DB7141-C7A2-4A92-BAEB-8DEB4CBFDAE4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -147,6 +156,7 @@ Global
 		{1607B62F-B9DC-40B7-880F-5429F2703092} = {3398267F-E778-4C49-BD11-6AE965834B4E}
 		{5A3E2B9C-B7CC-4FA4-9053-F70EB726E771} = {0AF89A25-BD8A-477B-BA4F-3DD35DC9570D}
 		{5CEC2087-20FA-4492-AAD0-B800125B187B} = {5A3E2B9C-B7CC-4FA4-9053-F70EB726E771}
+		{39DB7141-C7A2-4A92-BAEB-8DEB4CBFDAE4} = {95568319-296E-4323-A50F-2FB03FC8BCFA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E4D223B9-A956-43EF-B4CE-5A63780C7A37}

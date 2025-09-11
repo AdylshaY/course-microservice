@@ -1,5 +1,4 @@
-﻿using MassTransit;
-using System.Text;
+﻿using System.Text;
 
 namespace CourseMicroservice.Order.Domain.Entities
 {
@@ -33,7 +32,7 @@ namespace CourseMicroservice.Order.Domain.Entities
         {
             return new Order()
             {
-                Id = NewId.NextSequentialGuid(),
+                Id = Guid.CreateVersion7(),
                 Code = GenerateCode(),
                 BuyerId = buyerId,
                 Created = DateTime.Now,
@@ -48,7 +47,7 @@ namespace CourseMicroservice.Order.Domain.Entities
         {
             return new Order()
             {
-                Id = NewId.NextSequentialGuid(),
+                Id = Guid.CreateVersion7(),
                 Code = GenerateCode(),
                 BuyerId = buyerId,
                 Created = DateTime.Now,
