@@ -19,7 +19,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 
 builder.Services.AddAuthenticationAndAuthorizationExtension(builder.Configuration);
-builder.Services.AddMasstransitExtension(builder.Configuration);
+builder.Services.AddCommonMasstransitExtension(builder.Configuration);
 
 var app = builder.Build();
 

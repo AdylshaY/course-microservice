@@ -1,4 +1,5 @@
 ﻿using CourseMicroservice.Shared.Filters;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CourseMicroservice.Catalog.API.Features.Courses.Create
 {
@@ -6,10 +7,11 @@ namespace CourseMicroservice.Catalog.API.Features.Courses.Create
     {
         public static RouteGroupBuilder CreateCourseGroupItemEndpoint(this RouteGroupBuilder group)
         {
-            group.MapPost("/", async (CreateCourseCommand command, IMediator mediator) => (await mediator.Send(command)).ToGenericResult())
+            group.MapPost("/", async ([FromForm] CreateCourseCommand command, IMediator mediator) => (await mediator.Send(command)).ToGenericResult())
                 .WithName("CreateCourse")
                 .Produces<CreateCourseResponse>(StatusCodes.Status201Created)
-                .AddEndpointFilter<ValidationFilter<CreateCourseCommand>>();
+                .AddEndpointFilter<ValidationFilter<CreateCourseCommand>>()
+                .DisableAntiforgery();
 
             return group;
         }

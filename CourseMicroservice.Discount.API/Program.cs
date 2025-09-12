@@ -18,7 +18,7 @@ builder.Services.AddCommonServiceExtension(typeof(DiscountAssembly));
 builder.Services.AddApiVersionExtension();
 
 builder.Services.AddAuthenticationAndAuthorizationExtension(builder.Configuration);
-builder.Services.AddMasstransitExtension(builder.Configuration);
+builder.Services.AddCommonMasstransitExtension(builder.Configuration);
 
 var app = builder.Build();
 

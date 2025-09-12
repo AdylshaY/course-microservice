@@ -1,17 +1,18 @@
-﻿using MassTransit;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using CourseMicroservice.Bus;
+using CourseMicroservice.Catalog.API.Consumers;
 
-namespace CourseMicroservice.Bus
+namespace CourseMicroservice.Catalog.API
 {
     public static class MasstransitConfigurationExtension
     {
-        public static IServiceCollection AddCommonMasstransitExtension(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddMasstransitExtension(this IServiceCollection services, IConfiguration configuration)
         {
             var busOptions = (configuration.GetSection(nameof(BusOptions)).Get<BusOptions>())!;
 
             services.AddMassTransit(configure =>
             {
+                configure.AddConsumer<CoursePictureUploadedEventConsumer>();
+
                 configure.UsingRabbitMq((ctx, cfg) =>
                 {
                     cfg.Host(new Uri($"rabbitmq://{busOptions.Address}:{busOptions.Port}"), host =>
@@ -20,7 +21,10 @@ namespace CourseMicroservice.Bus
                         host.Password(busOptions.Password);
                     });
 
-                    cfg.ConfigureEndpoints(ctx);
+                    cfg.ReceiveEndpoint("catalog-microservice.course-picture-uploaded.queue", e =>
+                    {
+                        e.ConfigureConsumer<CoursePictureUploadedEventConsumer>(ctx);
+                    });
                 });
             });
 
