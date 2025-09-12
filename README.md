@@ -1,107 +1,109 @@
-![.NET](https://img.shields.io/badge/.NET-9-purple)
-![Docker](https://img.shields.io/badge/Docker-Compose-blue)
-![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?logo=mongodb&logoColor=white)
-![Redis](https://img.shields.io/badge/Redis-DC382D?logo=redis&logoColor=white)
-![SQL Server](https://img.shields.io/badge/SQL_Server-CC2927?logo=microsoft-sql-server&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?logo=postgresql&logoColor=white)
-![Keycloak](https://img.shields.io/badge/Keycloak-4D4D4D?logo=redhat&logoColor=white)
-![YARP](https://img.shields.io/badge/YARP-API_Gateway-orange)
-![MediatR](https://img.shields.io/badge/MediatR-CQRS-green)
-![RabbitMQ](https://img.shields.io/badge/RabbitMQ-FF6600?logo=rabbitmq&logoColor=white)
-![MassTransit](https://img.shields.io/badge/MassTransit-Message_Bus-lightgrey)
-![Swagger](https://img.shields.io/badge/Swagger-85EA2D?logo=swagger&logoColor=black)
+[![.NET](https://img.shields.io/badge/.NET-9-purple)](#)
+[![Docker](https://img.shields.io/badge/Docker-Compose-blue)](#)
+[![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?logo=mongodb&logoColor=white)](#)
+[![Redis](https://img.shields.io/badge/Redis-DC382D?logo=redis&logoColor=white)](#)
+[![SQL Server](https://img.shields.io/badge/SQL_Server-CC2927?logo=microsoft-sql-server&logoColor=white)](#)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?logo=postgresql&logoColor=white)](#)
+[![Keycloak](https://img.shields.io/badge/Keycloak-4D4D4D?logo=redhat&logoColor=white)](#)
+[![YARP](https://img.shields.io/badge/YARP-API_Gateway-orange)](#)
+[![MediatR](https://img.shields.io/badge/MediatR-CQRS-green)](#)
+[![RabbitMQ](https://img.shields.io/badge/RabbitMQ-FF6600?logo=rabbitmq&logoColor=white)](#)
+[![MassTransit](https://img.shields.io/badge/MassTransit-Message_Bus-lightgrey)](#)
+[![Swagger](https://img.shields.io/badge/Swagger-85EA2D?logo=swagger&logoColor=black)](#)
+
+[English](README.md) | [Türkçe](README.tr.md)
 
 # Course Microservice Platform
 
-Bu proje, online eğitim platformları için tasarlanmış modern bir mikroservis mimarisidir. .NET 9, MongoDB, Redis, SQL Server ve Keycloak teknolojilerini kullanarak ölçeklenebilir ve güvenli bir e-öğrenme sistemi sunar.
+This project is a modern microservices architecture for online learning platforms. It provides a scalable and secure e-learning system using .NET 9, MongoDB, Redis, SQL Server, and Keycloak.
 
-## 🏗️ Mimari
+## 🏗️ Architecture
 
-Proje mikroservis mimarisini benimser ve her servis kendi sorumluluğuna odaklanır:
+The platform follows microservices architecture; each service has a single responsibility:
 
-- **API Gateway (YARP)**: Tüm istekleri yönlendiren merkezi giriş noktası
-- **Catalog API**: Kurs ve kategori yönetimi
-- **Basket API**: Sepet işlemleri ve oturum yönetimi
-- **Order API**: Sipariş işlemleri ve siparişlerin durumu
-- **Payment API**: Ödeme işlemleri
-- **Discount API**: İndirim kuponları ve promosyon yönetimi
-- **File API**: Dosya yükleme ve statik içerik sunumu
+- **API Gateway (YARP)**: Central entry routing all requests
+- **Catalog API**: Course and category management
+- **Basket API**: Shopping basket operations and session
+- **Order API**: Order operations and tracking
+- **Payment API**: Payment operations
+- **Discount API**: Discount coupons and promotions
+- **File API**: File upload and static content
 
-Ek olarak servisler arası iletişimde RabbitMQ ve MassTransit kullanılır.
+Inter-service async communication is powered by RabbitMQ and MassTransit.
 
-## 🎯 Temel Özellikler
+## 🎯 Key Features
 
-### 🎓 Kurs Yönetimi
+### 🎓 Course Management
 
-- Kurs oluşturma, düzenleme ve silme
-- Kategori bazlı organizasyon
-- Kurs detayları (süre, eğitmen, rating)
-- Kullanıcıya özel kurs listeleme
+- Create, update, delete courses
+- Category-based organization
+- Course details (duration, instructor, rating)
+- User-specific course listing
 
-### 🛒 Sepet ve Sipariş
+### 🛒 Basket and Orders
 
-- Gerçek zamanlı sepet yönetimi (Redis)
-- İndirim kuponları uygulama
-- Sipariş oluşturma ve takibi
-- Sipariş durumu güncellemeleri
+- Real-time basket with Redis
+- Apply discount coupons
+- Create and track orders
+- Order status updates
 
-### 💰 Ödeme ve İndirimler
+### 💰 Payments and Discounts
 
-- Güvenli ödeme işlemleri
-- İndirim kuponu sistemi
-- Kullanıcı bazlı indirim yönetimi
-- Sipariş toplam hesaplaması
+- Secure payment workflows
+- Discount coupon system
+- User-based discount management
+- Order total calculation
 
-### 🔐 Güvenlik ve Kimlik Doğrulama
+### 🔐 Security and Identity
 
-- Keycloak entegrasyonu
-- JWT token tabanlı kimlik doğrulama
-- Servisler arası güvenli iletişim
+- Keycloak integration
+- JWT-based authentication
+- Secure inter-service communication
 
-## 🛠️ Teknoloji Stack
+## 🛠️ Tech Stack
 
 ### Backend
 
-- **.NET 9**: Ana framework
-- **ASP.NET Core Minimal APIs**: Lightweight API endpoints
-- **Entity Framework Core**: ORM ve veritabanı erişimi
-- **MediatR**: CQRS pattern implementasyonu
-- **AutoMapper**: Object mapping
-- **FluentValidation**: Input validation
+- **.NET 9**
+- **ASP.NET Core Minimal APIs**
+- **Entity Framework Core**
+- **MediatR** (CQRS)
+- **AutoMapper**
+- **FluentValidation**
 
-### Veritabanları
+### Databases
 
-- **MongoDB**: Catalog ve Discount servisleri için
-- **Redis**: Basket cache sistemi için
-- **SQL Server**: Order servisi için
-- **PostgreSQL**: Keycloak için
+- **MongoDB** (Catalog, Discount)
+- **Redis** (Basket cache)
+- **SQL Server** (Order)
+- **PostgreSQL** (Keycloak)
 
-### Altyapı
+### Infrastructure
 
-- **Docker & Docker Compose**: Containerization
-- **YARP**: API Gateway
-- **Keycloak**: Identity ve Access Management
-- **RabbitMQ + MassTransit**: Event-driven asenkron iletişim
-- **Swagger/OpenAPI**: API dokümantasyonu
+- **Docker & Docker Compose**
+- **YARP** (API Gateway)
+- **Keycloak** (IAM)
+- **RabbitMQ + MassTransit** (Event-driven async)
+- **Swagger/OpenAPI**
 
-## 🚀 Hızlı Başlangıç
+## 🚀 Quickstart
 
-### Gereksinimler
+### Requirements
 
 - Docker Desktop
 - .NET 9 SDK
-- Visual Studio 2022 veya Visual Studio Code
+- Visual Studio 2022 or VS Code
 
-### Kurulum
+### Setup
 
-1. **Repository'yi klonlayın:**
+1) **Clone the repository:**
 
 ```bash
 git clone <repository-url>
 cd course-microservice
 ```
 
-2. **Environment variables dosyasını oluşturun:**
+2) **Create the environment variables (.env):**
 
 ```bash
 # .env dosyası oluşturun ve gerekli değişkenleri tanımlayın
@@ -131,13 +133,13 @@ RABBITMQ_DEFAULT_USER=root
 RABBITMQ_DEFAULT_PASS=Password12
 ```
 
-3. **Docker container'ları başlatın:**
+3) **Start infrastructure containers:**
 
 ```bash
 docker-compose up -d
 ```
 
-4. **Servisleri çalıştırın:**
+4) **Run the services:**
 
 ```bash
 dotnet run --project CourseMicroservice.Gateway
@@ -149,7 +151,7 @@ dotnet run --project CourseMicroservice.Discount.API
 dotnet run --project CourseMicroservice.File.API
 ```
 
-5. **Keycloak realm ve client’ları içe aktarın (opsiyonel ama önerilir):**
+5) **Import Keycloak realm and clients (optional but recommended):**
 
 - Keycloak UI: `http://localhost:8080`
 - Admin ile giriş yapın: `KEYCLOAK_ADMIN` / `KEYCLOAK_ADMIN_PASSWORD`
@@ -163,9 +165,9 @@ dotnet run --project CourseMicroservice.File.API
   - Discount: `Discount.API`
   - File: `File.API`
 
-### Token Alma Örnekleri
+### Getting Tokens
 
-Password Policy gerektiren rotalar için (kullanıcı akışı):
+For Password policy routes (resource owner password):
 
 ```bash
 curl -X POST \
@@ -176,7 +178,7 @@ curl -X POST \
   http://localhost:8080/realms/courseTenant/protocol/openid-connect/token
 ```
 
-ClientCredential Policy gerektiren rotalar için (uygulama akışı):
+For ClientCredential policy routes (client credentials):
 
 ```bash
 curl -X POST \
@@ -186,7 +188,7 @@ curl -X POST \
   http://localhost:8080/realms/courseTenant/protocol/openid-connect/token
 ```
 
-6. **Order servisi için veritabanını oluşturun (EF Core Migrations):**
+6) **Create Order database (EF Core migrations):**
 
 ```bash
 dotnet tool install --global dotnet-ef
@@ -195,16 +197,16 @@ dotnet ef database update \
   --startup-project CourseMicroservice.Order.API
 ```
 
-> Not: Order API `appsettings.Development.json` içindeki `SqlServer` connection string’i docker-compose ile açılan SQL Server portu (1434) ve `SA_PASSWORD` ile uyumludur. Farklı ortamda çalıştıracaksanız bu değerleri güncelleyin.
+> Note: Order API `SqlServer` connection string matches SQL Server port (1434) from docker-compose and `SA_PASSWORD`. Adjust for your environment if needed.
 
 ## 📋 API Endpoints
 
 ### Gateway (Port: 5220)
 
-- Ana giriş noktası, tüm istekleri ilgili servislere yönlendirir
-- URL versiyonlaması kullanılır: `/v1/...`, `/v2/...`
+- Central entry; routes requests to downstream services
+- URL versioning: `/v1/...`, `/v2/...`
 
-#### YARP Rotaları ve Politikalar
+#### YARP Routes & Policies
 
 - `/{version}/baskets/{**}` -> Basket.API (`/api/{version}/baskets/{**}`), Policy: Password
 - `/{version}/catalogs/{**}` -> Catalog.API (`/api/{version}/{**}`), Policy: ClientCredential
@@ -215,39 +217,39 @@ dotnet ef database update \
 
 ### Catalog API
 
-- `GET /api/v1/courses` - Tüm kursları listele
-- `GET /api/v1/courses/{id}` - Kurs detayı
-- `POST /api/v1/courses` - Yeni kurs oluştur
-- `GET /api/v1/categories` - Kategorileri listele
+- `GET /api/v1/courses` - List all courses
+- `GET /api/v1/courses/{id}` - Course details
+- `POST /api/v1/courses` - Create a course
+- `GET /api/v1/categories` - List categories
 
 ### Basket API
 
-- `GET /api/v1/baskets/user` - Kullanıcı sepetini getir
-- `POST /api/v1/baskets` - Sepete ürün ekle
-- `PUT /api/v1/baskets/user/apply-discount` - İndirim uygula
+- `GET /api/v1/baskets/user` - Get user basket
+- `POST /api/v1/baskets` - Add item to basket
+- `PUT /api/v1/baskets/user/apply-discount` - Apply discount
 
 ### Order API
 
-- `GET /api/v1/orders` - Siparişleri listele
-- `POST /api/v1/orders` - Yeni sipariş oluştur
+- `GET /api/v1/orders` - List user orders
+- `POST /api/v1/orders` - Create order
 
 ### Payment API
 
-- `POST /api/v1/payments` - Ödeme işlemi
+- `POST /api/v1/payments` - Create payment
 
 ### Discount API
 
-- `POST /api/v1/discounts` - Yeni indirim kuponu oluştur
-- `GET /api/v1/discounts/{code}` - İndirim kuponunu sorgula
+- `POST /api/v1/discounts` - Create discount coupon
+- `GET /api/v1/discounts/{code}` - Query coupon by code
 
 ### File API
 
-- `POST /api/v1/files` - Dosya yükleme (MassTransit komutu tetikler)
-- Statik dosyalar servis üzerinden `/files/{name}` ile sunulur (Gateway üzerinden değil)
+- `POST /api/v1/files` - Upload file (triggers MassTransit command)
+- Static files are served via service `/files/{name}` (not via gateway)
 
-## 🔧 Servis Portları
+## 🔧 Service Ports
 
-| Servis                | Port  | Admin UI               |
+| Service               | Port  | Admin UI               |
 | --------------------- | ----- | ---------------------- |
 | Gateway               | 5220  | -                      |
 | Catalog API           | 5277  | Swagger                |
@@ -264,58 +266,58 @@ dotnet ef database update \
 | Keycloak              | 8080  | -                      |
 | PostgreSQL (Keycloak) | 5432  | pgAdmin: 8888          |
 
-## 🏛️ Mimari Desenler
+## 🏛️ Architectural Patterns
 
 ### CQRS (Command Query Responsibility Segregation)
 
-- MediatR kullanılarak command ve query'ler ayrılmış
-- Her işlem için ayrı handler'lar
+- Commands and queries separated via MediatR
+- Dedicated handlers per operation
 
 ### Domain-Driven Design (DDD)
 
-- Order servisi için layered architecture
-- Domain, Application, Persistence katmanları
+- Layered architecture for Order service
+- Domain, Application, Persistence layers
 
 ### Repository Pattern
 
-- Veritabanı erişim katmanının soyutlanması
-- Unit of Work pattern implementasyonu
+- Abstracted data access layer
+- Unit of Work pattern
 
 ### Minimal APIs
 
-- Lightweight endpoint tanımlamaları
-- Extension method'lar ile organize edilmiş endpoint'ler
+- Lightweight endpoints
+- Organized via extension methods
 
-### Event-Driven İletişim (RabbitMQ + MassTransit)
+### Event-Driven Communication (RabbitMQ + MassTransit)
 
-- Komutlar: `UploadCoursePictureCommand` (Gateway veya başka bir servis tarafından tetiklenir, File API tüketir)
-- Olaylar: `CoursePictureUploadedEvent` (File API yayınlar, Catalog API tüketir ve `ImageUrl` günceller)
-- Ortak yapılandırma: `BusOptions` ile RabbitMQ host/kullanıcı/şifre/port ayarı
+- Commands: `UploadCoursePictureCommand` (triggered upstream, consumed by File API)
+- Events: `CoursePictureUploadedEvent` (published by File API; consumed by Catalog API to update `ImageUrl`)
+- Shared config: `BusOptions` (host/username/password/port)
 
-## 🔄 Mikroservis İletişimi
+## 🔄 Microservice Communication
 
-- **Synchronous**: HTTP/REST API çağrıları
-- **API Gateway Pattern**: YARP ile merkezi routing
-- **Database per Service**: Her servis kendi veritabanı
-- **Authentication**: Keycloak ile merkezi kimlik doğrulama
+- **Synchronous**: HTTP/REST calls
+- **API Gateway Pattern**: Central routing via YARP
+- **Database per Service**: Separate DB per service
+- **Authentication**: Central auth via Keycloak
 
-### Yetkilendirme Politikaları
+### Authorization Policies
 
-- `Password` Policy: Kullanıcı bazlı akış; JWT içinde `email` claim’i zorunlu
-- `ClientCredential` Policy: Servis hesabı/uygulama kimlik bilgileri; JWT içinde `client_id` claim’i zorunlu
+- `Password` Policy: End-user tokens (requires `email` claim)
+- `ClientCredential` Policy: App/service tokens (requires `client_id` claim)
 
-Keycloak’ta ilgili client’ların erişim türlerini (confidential/public) ve rollerini ayarlayarak bu politikalara uygun token’lar üretmelisiniz.
+Configure Keycloak clients (confidential/public) and roles to issue tokens matching the policies.
 
-## 📊 Monitoring ve Admin
+## 📊 Monitoring & Admin
 
-- **Swagger UI**: Her servis için API dokümantasyonu
-- **Mongo Express**: MongoDB veritabanı yönetimi
-- **Redis Commander**: Redis cache yönetimi
-- **pgAdmin**: PostgreSQL yönetimi
-- **RabbitMQ Management**: Kuyruk ve exchange yönetimi
+- **Swagger UI** per service
+- **Mongo Express**
+- **Redis Commander**
+- **pgAdmin**
+- **RabbitMQ Management**
 
-## ❓ Sık Karşılaşılan Sorunlar
+## ❓ Troubleshooting
 
-- SQL Server bağlantı hatası: `.env` içindeki `SA_PASSWORD` ile Order API `appsettings.Development.json` içindeki şifre uyumlu olmalı (`Password12*`).
-- Keycloak 401: İstek gönderdiğiniz rota hangi policy’i istiyorsa (Password/ClientCredential) ona uygun token kullanın. Gateway rotaları kısmını kontrol edin.
-- Mongo bağlantı hatası: `MONGO_USERNAME`/`MONGO_PASSWORD` değerleri ile Catalog/Discount connection string’leri uyumlu olmalı (`mongodb://myuser:Password12@localhost:27030`).
+- SQL Server connection: Ensure `SA_PASSWORD` in `.env` matches Order API connection string (`Password12*`).
+- Keycloak 401: Use a token matching the required policy (Password/ClientCredential) for the route.
+- Mongo connection: `MONGO_USERNAME`/`MONGO_PASSWORD` must match Catalog/Discount connection strings (`mongodb://myuser:Password12@localhost:27030`).
