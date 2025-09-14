@@ -1,4 +1,3 @@
-using CourseMicroservice.Bus;
 using CourseMicroservice.Discount.API;
 using CourseMicroservice.Discount.API.Features.Discounts;
 using CourseMicroservice.Discount.API.Options;
@@ -18,7 +17,7 @@ builder.Services.AddCommonServiceExtension(typeof(DiscountAssembly));
 builder.Services.AddApiVersionExtension();
 
 builder.Services.AddAuthenticationAndAuthorizationExtension(builder.Configuration);
-builder.Services.AddCommonMasstransitExtension(builder.Configuration);
+builder.Services.AddMasstransitExtension(builder.Configuration);
 
 var app = builder.Build();
 
