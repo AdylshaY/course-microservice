@@ -19,7 +19,7 @@ namespace CourseMicroservice.Basket.API.Features.Baskets
                 .GetBasketGroupItemEndpoint()
                 .ApplyDiscountCouponGroupItemEndpoint()
                 .RemoveDiscountCouponGroupItemEndpoint()
-                .RequireAuthorization();
+                .RequireAuthorization("Password");
         }
     }
 }

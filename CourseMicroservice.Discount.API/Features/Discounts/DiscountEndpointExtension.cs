@@ -13,7 +13,7 @@ namespace CourseMicroservice.Discount.API.Features.Discounts
                 .WithApiVersionSet(apiVersionSet)
                 .CreateDiscountGroupItemEndpoint()
                 .GetDiscountByCodeGroupItemEndpoint()
-                .RequireAuthorization();
+                .RequireAuthorization("Password");
         }
     }
 }

@@ -11,7 +11,7 @@ namespace CourseMicroservice.Order.API.Endpoints.Orders
                 .WithApiVersionSet(apiVersionSet)
                 .CreateOrderGroupItemEndpoint()
                 .GetOrderListGroupItemEndpoint()
-                .RequireAuthorization();
+                .RequireAuthorization("Password");
         }
     }
 }
