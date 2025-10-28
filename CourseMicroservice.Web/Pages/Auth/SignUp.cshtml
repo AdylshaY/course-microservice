@@ -1,0 +1,69 @@
+﻿@page
+@model CourseMicroservice.Web.Pages.Auth.SignUpModel
+@{
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h1>Sign Up</h1>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="mb-3">
+                        <label asp-for="SignUpViewModel.Username" class="form-label"></label>
+                        <input asp-for="SignUpViewModel.Username" class="form-control" />
+                        <div class="text-danger">
+                            <span asp-validation-for="SignUpViewModel.Username"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="SignUpViewModel.FirstName" class="form-label"></label>
+                        <input asp-for="SignUpViewModel.FirstName" class="form-control" />
+                        <div class="text-danger">
+                            <span asp-validation-for="SignUpViewModel.FirstName"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="SignUpViewModel.LastName" class="form-label"></label>
+                        <input asp-for="SignUpViewModel.LastName" class="form-control" />
+                        <div class="text-danger">
+                            <span asp-validation-for="SignUpViewModel.LastName"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="SignUpViewModel.Email" class="form-label"></label>
+                        <input asp-for="SignUpViewModel.Email" class="form-control" />
+                        <div class="text-danger">
+                            <span asp-validation-for="SignUpViewModel.Email"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="SignUpViewModel.Password" class="form-label"></label>
+                        <input asp-for="SignUpViewModel.Password" class="form-control" />
+                        <div class="text-danger">
+                            <span asp-validation-for="SignUpViewModel.Password"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="SignUpViewModel.PasswordConfirm" class="form-label"></label>
+                        <input asp-for="SignUpViewModel.PasswordConfirm" class="form-control" />
+                        <div class="text-danger">
+                            <span asp-validation-for="SignUpViewModel.PasswordConfirm"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary">Create an account</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

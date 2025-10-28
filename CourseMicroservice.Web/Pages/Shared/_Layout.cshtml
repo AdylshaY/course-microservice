@@ -10,6 +10,17 @@
     <link rel="stylesheet" href="~/CourseMicroservice.Web.styles.css" asp-append-version="true" />
 </head>
 <body>
+    @* Global Bootstrap Toast Message *@
+
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100">
+        <div id="globalToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+            <div class="d-flex">
+                <div class="toast-body" id="globalToastBody"></div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
@@ -48,5 +59,12 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        window.AppConfig = {
+            toastMessage: @Json.Serialize(TempData["ToastMessage"]),
+            toastType: @Json.Serialize(TempData["ToastType"])
+        };
+    </script>
 </body>
 </html>

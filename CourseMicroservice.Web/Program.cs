@@ -1,7 +1,13 @@
+using CourseMicroservice.Web.Extensions;
+using CourseMicroservice.Web.Pages.Auth.SignUp;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddOptionsExtension();
+
+builder.Services.AddHttpClient<SignUpService>();
 
 var app = builder.Build();
 
