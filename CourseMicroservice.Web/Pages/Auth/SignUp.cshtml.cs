@@ -15,7 +15,7 @@ namespace CourseMicroservice.Web.Pages.Auth
 
         public async Task<IActionResult> OnPostAsync()
         {
-            // TODO: Validation
+            if (!ModelState.IsValid) return RedirectToPage();
 
             var result = await signUpService.CreateAccount(SignUpViewModel);
             if (result.IsFail)
@@ -32,7 +32,7 @@ namespace CourseMicroservice.Web.Pages.Auth
                 return RedirectToPage();
             }
 
-            TempData["ToastMessage"] = "Hesabýnýz baþarýyla oluþturuldu. Lütfen giriþ yapýn.";
+            TempData["ToastMessage"] = "The user was successfully created. Please log in.";
             TempData["ToastType"] = "success";
 
             return RedirectToPage("/index");

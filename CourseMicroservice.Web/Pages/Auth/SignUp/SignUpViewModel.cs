@@ -2,38 +2,55 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public record SignUpViewModel(
+    public record SignUpViewModel
+    {
         [Display(Name = "First Name: ")]
         [Required(ErrorMessage = "First Name is required")]
-        string FirstName,
+        public string FirstName { get; init; }
 
         [Display(Name = "Last Name: ")]
         [Required(ErrorMessage = "Last Name is required")]
-        string LastName,
+        public string LastName { get; init; }
 
         [Display(Name = "Username: ")]
         [Required(ErrorMessage = "Username is required")]
-        string Username,
+        public string Username { get; init; }
 
         [Display(Name = "Email: ")]
         [Required(ErrorMessage = "Email is required")]
         [EmailAddress(ErrorMessage = "Invalid Email")]
-        string Email,
+        public string Email { get; init; }
 
         [Display(Name = "Password: ")]
         [Required(ErrorMessage = "Password is required")]
-        string Password,
+        public string Password { get; init; }
 
         [Display(Name = "Confirm Password: ")]
         [Required(ErrorMessage = "Password Confirm is required")]
-        string PasswordConfirm
-    )
-    {
-        public static SignUpViewModel Empty => new(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty);
+        [Compare(nameof(Password), ErrorMessage = "Passwords do not match")]
+        public string PasswordConfirm { get; init; }
+
+        public static SignUpViewModel Empty => new()
+        {
+            FirstName = string.Empty,
+            LastName = string.Empty,
+            Username = string.Empty,
+            Email = string.Empty,
+            Password = string.Empty,
+            PasswordConfirm = string.Empty
+        };
 
         /// <summary>
         /// For testing purpose.
         /// </summary>
-        public static SignUpViewModel GetExampleModel => new("Adylsha", "Yumayev", "adylsha.yumayev", "adylsha.yumayev@example.com", "Password123", "Password123");
+        public static SignUpViewModel GetExampleModel => new()
+        {
+            FirstName = "Adylsha",
+            LastName = "Yumayev",
+            Username = "adylsha.yumayev",
+            Email = "adylsha.yumayev@example.com",
+            Password = "Password123",
+            PasswordConfirm = "Password123"
+        };
     }
 }

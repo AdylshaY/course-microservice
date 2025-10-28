@@ -10,28 +10,37 @@
     {
         public async Task<ServiceResult> CreateAccount(SignUpViewModel model)
         {
-            var token = await GetClientCredentialTokenAsAdmin();
-            var address = $"{identityOption.BaseAddress}/admin/realms/courseTenant/users";
-
-            client.SetBearerToken(token);
-            var userCreateRequest = CreateUserCreateRequest(model);
-            var response = await client.PostAsJsonAsync(address, userCreateRequest);
-
-            if (!response.IsSuccessStatusCode)
+            try
             {
-                if (response.StatusCode != System.Net.HttpStatusCode.InternalServerError)
+                var token = await GetClientCredentialTokenAsAdmin();
+                var address = $"{identityOption.BaseAddress}/admin/realms/courseTenant/users";
+
+                client.SetBearerToken(token);
+                var userCreateRequest = CreateUserCreateRequest(model);
+                var response = await client.PostAsJsonAsync(address, userCreateRequest);
+
+                if (!response.IsSuccessStatusCode)
                 {
-                    var keycloakErrorResponse = await response.Content.ReadFromJsonAsync<KeycloakErrorResponse>();
-                    return ServiceResult.Error(keycloakErrorResponse!.ErrorMessage);
+                    if (response.StatusCode != System.Net.HttpStatusCode.InternalServerError)
+                    {
+                        var keycloakErrorResponse = await response.Content.ReadFromJsonAsync<KeycloakErrorResponse>();
+                        return ServiceResult.Error(keycloakErrorResponse!.ErrorMessage);
+                    }
+
+                    var error = await response.Content.ReadAsStringAsync();
+                    logger.LogError(error);
+
+                    return ServiceResult.Error("System error occurred, please try again later.");
                 }
 
-                var error = await response.Content.ReadAsStringAsync();
-                logger.LogError(error);
-
+                return ServiceResult.Success();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "An exception occurred while creating account.");
                 return ServiceResult.Error("System error occurred, please try again later.");
             }
 
-            return ServiceResult.Success();
         }
 
         private static UserCreateRequest CreateUserCreateRequest(SignUpViewModel model)
