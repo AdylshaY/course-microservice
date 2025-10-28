@@ -1,4 +1,5 @@
 using CourseMicroservice.Web.Extensions;
+using CourseMicroservice.Web.Pages.Auth.SignIn;
 using CourseMicroservice.Web.Pages.Auth.SignUp;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,7 @@ builder.Services.AddMvc(options =>
 builder.Services.AddOptionsExtension();
 
 builder.Services.AddHttpClient<SignUpService>();
+builder.Services.AddHttpClient<SignInService>();
 
 var app = builder.Build();
 
