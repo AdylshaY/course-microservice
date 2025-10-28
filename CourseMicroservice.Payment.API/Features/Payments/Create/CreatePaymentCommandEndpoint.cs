@@ -12,7 +12,8 @@ namespace CourseMicroservice.Payment.API.Features.Payments.Create
             group.MapPost("/", async ([FromBody] CreatePaymentCommand command, IMediator mediator) => (await mediator.Send(command)).ToGenericResult())
                 .WithName("create")
                 .AddEndpointFilter<ValidationFilter<CreatePaymentCommand>>()
-                .MapToApiVersion(1, 0);
+                .MapToApiVersion(1, 0)
+                .RequireAuthorization("Password");
 
             return group;
         }

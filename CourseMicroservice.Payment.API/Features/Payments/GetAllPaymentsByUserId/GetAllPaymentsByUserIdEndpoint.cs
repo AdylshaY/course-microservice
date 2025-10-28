@@ -10,7 +10,8 @@ namespace CourseMicroservice.Payment.API.Features.Payments.GetAllPaymentsByUserI
         {
             group.MapGet("/", async (IMediator mediator) => (await mediator.Send(new GetAllPaymentsByUserIdQuery())).ToGenericResult())
                 .WithName("getAllPaymentsByUserId")
-                .MapToApiVersion(1, 0);
+                .MapToApiVersion(1, 0)
+                .RequireAuthorization("ClientCredential");
 
             return group;
         }

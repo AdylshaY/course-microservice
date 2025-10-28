@@ -1,6 +1,8 @@
 using CourseMicroservice.Bus;
 using CourseMicroservice.Order.API.Endpoints.Orders;
 using CourseMicroservice.Order.Application;
+using CourseMicroservice.Order.Application.BackgroundServices;
+using CourseMicroservice.Order.Application.Contracts.RefitServices;
 using CourseMicroservice.Order.Application.Contracts.Repositories;
 using CourseMicroservice.Order.Application.Contracts.UnitOfWork;
 using CourseMicroservice.Order.Persistence;
@@ -27,6 +29,9 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddAuthenticationAndAuthorizationExtension(builder.Configuration);
 builder.Services.AddCommonMasstransitExtension(builder.Configuration);
+builder.Services.AddRefitConfigurationExtension(builder.Configuration);
+
+builder.Services.AddHostedService<CheckPaymentStatusOrderBackgroundService>();
 
 var app = builder.Build();
 

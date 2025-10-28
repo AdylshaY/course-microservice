@@ -1,6 +1,7 @@
 ﻿using Asp.Versioning.Builder;
 using CourseMicroservice.Payment.API.Features.Payments.Create;
 using CourseMicroservice.Payment.API.Features.Payments.GetAllPaymentsByUserId;
+using CourseMicroservice.Payment.API.Features.Payments.GetStatus;
 
 namespace CourseMicroservice.Payment.API.Features.Payments
 {
@@ -13,7 +14,7 @@ namespace CourseMicroservice.Payment.API.Features.Payments
                 .WithApiVersionSet(apiVersionSet)
                 .CreatePaymentGroupItemEndpoint()
                 .GetAllPaymentByUserIdGroupItemEndpoint()
-                .RequireAuthorization("Password");
+                .GetPaymentStatusGroupItemEndpoint();
         }
     }
 }
