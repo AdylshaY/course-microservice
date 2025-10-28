@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11123.170 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F23D9C44-C98E-4C77-BAA0-D0FD02B6EA2E}"
 EndProject
@@ -70,6 +70,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "keycloak-clients", "keycloa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseMicroservice.Bus", "CourseMicroservice.Bus\CourseMicroservice.Bus.csproj", "{39DB7141-C7A2-4A92-BAEB-8DEB4CBFDAE4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ui", "ui", "{F0BE6733-5D2D-4FA6-9074-954817FDB2FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseMicroservice.Web", "CourseMicroservice.Web\CourseMicroservice.Web.csproj", "{DD003499-CFAB-44BE-95E7-AC62472EB2E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -128,6 +132,10 @@ Global
 		{39DB7141-C7A2-4A92-BAEB-8DEB4CBFDAE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39DB7141-C7A2-4A92-BAEB-8DEB4CBFDAE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39DB7141-C7A2-4A92-BAEB-8DEB4CBFDAE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD003499-CFAB-44BE-95E7-AC62472EB2E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD003499-CFAB-44BE-95E7-AC62472EB2E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD003499-CFAB-44BE-95E7-AC62472EB2E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD003499-CFAB-44BE-95E7-AC62472EB2E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -157,6 +165,8 @@ Global
 		{5A3E2B9C-B7CC-4FA4-9053-F70EB726E771} = {0AF89A25-BD8A-477B-BA4F-3DD35DC9570D}
 		{5CEC2087-20FA-4492-AAD0-B800125B187B} = {5A3E2B9C-B7CC-4FA4-9053-F70EB726E771}
 		{39DB7141-C7A2-4A92-BAEB-8DEB4CBFDAE4} = {95568319-296E-4323-A50F-2FB03FC8BCFA}
+		{F0BE6733-5D2D-4FA6-9074-954817FDB2FC} = {F23D9C44-C98E-4C77-BAA0-D0FD02B6EA2E}
+		{DD003499-CFAB-44BE-95E7-AC62472EB2E3} = {F0BE6733-5D2D-4FA6-9074-954817FDB2FC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E4D223B9-A956-43EF-B4CE-5A63780C7A37}
