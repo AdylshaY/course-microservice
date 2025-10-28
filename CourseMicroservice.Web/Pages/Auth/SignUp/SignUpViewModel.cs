@@ -3,12 +3,30 @@
     using System.ComponentModel.DataAnnotations;
 
     public record SignUpViewModel(
-        [Display(Name = "First Name: ")] string FirstName,
-        [Display(Name = "Last Name: ")] string LastName,
-        [Display(Name = "Username: ")] string Username,
-        [Display(Name = "Email: ")] string Email,
-        [Display(Name = "Password: ")] string Password,
-        [Display(Name = "Confirm Password: ")] string PasswordConfirm
+        [Display(Name = "First Name: ")]
+        [Required(ErrorMessage = "First Name is required")]
+        string FirstName,
+
+        [Display(Name = "Last Name: ")]
+        [Required(ErrorMessage = "Last Name is required")]
+        string LastName,
+
+        [Display(Name = "Username: ")]
+        [Required(ErrorMessage = "Username is required")]
+        string Username,
+
+        [Display(Name = "Email: ")]
+        [Required(ErrorMessage = "Email is required")]
+        [EmailAddress(ErrorMessage = "Invalid Email")]
+        string Email,
+
+        [Display(Name = "Password: ")]
+        [Required(ErrorMessage = "Password is required")]
+        string Password,
+
+        [Display(Name = "Confirm Password: ")]
+        [Required(ErrorMessage = "Password Confirm is required")]
+        string PasswordConfirm
     )
     {
         public static SignUpViewModel Empty => new(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty);
