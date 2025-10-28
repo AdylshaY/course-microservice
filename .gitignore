@@ -76,4 +76,19 @@ _[Ss]cripts
 
 .vs
 
-wwwroot
+# 1. ADIM (Genel Kural):
+# Bütün projelerdeki 'wwwroot' klasörlerinin İÇERİĞİNİ yoksay.
+# '*' kullanmak, klasörlerin kendisini değil, içindekileri hedefler.
+# Bu, bir sonraki adımda istisna uygulamamıza izin verir.
+**/[Ww]wwroot/*
+
+# 2. ADIM (İstisna):
+# 'Proje.Web' klasörünün içindeki 'wwwroot'un içeriğini yoksayma (geri al).
+# Bu kural, bir üstteki genel kuralı Proje.Web için ezer.
+# (Baştaki '/' ve '!' önemlidir)
+!/CourseMicroservice.Web/wwwroot/**
+
+# 3. ADIM (Spesifik Kural):
+# Artık 'Proje.Web/wwwroot'un içini gördüğümüze göre,
+# sadece 'lib' klasörünü tekrar yoksay.
+/CourseMicroservice.Web/wwwroot/lib/
