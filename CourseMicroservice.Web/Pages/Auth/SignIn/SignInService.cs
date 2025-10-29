@@ -1,22 +1,33 @@
 ﻿using CourseMicroservice.Web.Options;
 using CourseMicroservice.Web.Services;
 using Duende.IdentityModel.Client;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
 
 namespace CourseMicroservice.Web.Pages.Auth.SignIn
 {
-    public class SignInService(IdentityOption identityOption, HttpClient client, ILogger<SignInService> logger)
+    public class SignInService(IHttpContextAccessor httpContextAccessor, TokenService tokenService, IdentityOption identityOption, HttpClient client, ILogger<SignInService> logger)
     {
-        public async Task<ServiceResult> SignInAsync(SignInViewModel signInViewModel)
+        public async Task<ServiceResult> AuthenticateAsync(SignInViewModel signInViewModel)
         {
             try
             {
                 var tokenResponse = await GetAccessToken(signInViewModel);
 
-                if (tokenResponse.IsError)
+                if (tokenResponse.IsError || string.IsNullOrEmpty(tokenResponse.AccessToken))
                 {
                     logger.LogWarning("Token request failed: {Error}", tokenResponse.Error);
                     return ServiceResult.Error(tokenResponse.Error!, tokenResponse.ErrorDescription!);
                 }
+
+                var userClaims = tokenService.ExtractClaims(tokenResponse.AccessToken);
+                var authenticationProperties = tokenService.CreateAuthenticationProperties(tokenResponse);
+
+                var claimIdentity = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme, ClaimTypes.Name, ClaimTypes.Role);
+                var claimsPrincipal = new ClaimsPrincipal(claimIdentity);
+
+                await httpContextAccessor.HttpContext!.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal, authenticationProperties);
 
                 return ServiceResult.Success();
             }
@@ -39,7 +50,6 @@ namespace CourseMicroservice.Web.Pages.Auth.SignIn
             var discoveryResponse = await client.GetDiscoveryDocumentAsync(discoveryRequest);
 
             if (discoveryResponse.IsError) throw new Exception($"Failed to retrieve discovery document: {discoveryResponse.Error}");
-
 
             var tokenResponse = await client.RequestPasswordTokenAsync(new PasswordTokenRequest()
             {

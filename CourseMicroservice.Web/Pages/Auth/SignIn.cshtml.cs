@@ -17,7 +17,7 @@ namespace CourseMicroservice.Web.Pages.Auth
         {
             if (!ModelState.IsValid) return RedirectToPage();
 
-            var result = await signInService.SignInAsync(SignInViewModel);
+            var result = await signInService.AuthenticateAsync(SignInViewModel);
 
             if (result.IsFail)
             {
