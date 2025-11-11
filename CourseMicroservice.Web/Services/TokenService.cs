@@ -59,5 +59,31 @@ namespace CourseMicroservice.Web.Services
 
             return tokenResponse;
         }
+
+        public async Task<TokenResponse> GetClientAccessToken()
+        {
+            var discoveryRequest = new DiscoveryDocumentRequest()
+            {
+                Address = identityOption.Address,
+                Policy = { RequireHttps = false }
+            };
+
+            httpClient.BaseAddress = new Uri(identityOption.Address);
+            var discoveryResponse = await httpClient.GetDiscoveryDocumentAsync(discoveryRequest);
+
+            if (discoveryResponse.IsError) throw new Exception($"Failed to retrieve discovery document: {discoveryResponse.Error}");
+
+            var tokenResponse = await httpClient.RequestClientCredentialsTokenAsync(
+                new ClientCredentialsTokenRequest
+                {
+                    Address = discoveryResponse.TokenEndpoint,
+                    ClientId = identityOption.Web.ClientId,
+                    ClientSecret = identityOption.Web.ClientSecret,
+                });
+
+            if (tokenResponse.IsError || string.IsNullOrEmpty(tokenResponse.AccessToken)) throw new Exception($"Failed to retrieve token: {tokenResponse.Error}");
+
+            return tokenResponse;
+        }
     }
 }

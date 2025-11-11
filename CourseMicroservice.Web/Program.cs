@@ -1,8 +1,13 @@
+using CourseMicroservice.Web.DelegateHandlers;
 using CourseMicroservice.Web.Extensions;
+using CourseMicroservice.Web.Options;
 using CourseMicroservice.Web.Pages.Auth.SignIn;
 using CourseMicroservice.Web.Pages.Auth.SignUp;
 using CourseMicroservice.Web.Services;
+using CourseMicroservice.Web.Services.Refit;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.Configuration;
+using Refit;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +24,12 @@ builder.Services.AddHttpClient<SignUpService>();
 builder.Services.AddHttpClient<SignInService>();
 builder.Services.AddHttpClient<TokenService>();
 builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddRefitClient<ICatalogRefitService>().ConfigureHttpClient(cfg =>
+{
+    var gatewayOption = builder.Configuration.GetSection(nameof(GatewayOption)).Get<GatewayOption>();
+    cfg.BaseAddress = new Uri(gatewayOption!.BaseAddress);
+}).AddHttpMessageHandler<AuthenticatedHttpClientHandler>().AddHttpMessageHandler<ClientAuthenticatedHttpClientHandler>();
 
 builder.Services.AddAuthentication(configureOptions =>
     {
