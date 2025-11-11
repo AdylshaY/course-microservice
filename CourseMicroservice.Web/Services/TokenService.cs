@@ -1,4 +1,5 @@
-﻿using Duende.IdentityModel.Client;
+﻿using CourseMicroservice.Web.Options;
+using Duende.IdentityModel.Client;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using System.IdentityModel.Tokens.Jwt;
@@ -6,7 +7,7 @@ using System.Security.Claims;
 
 namespace CourseMicroservice.Web.Services
 {
-    public class TokenService
+    public class TokenService(HttpClient httpClient, IdentityOption identityOption)
     {
         public List<Claim> ExtractClaims(string accessToken)
         {
@@ -33,6 +34,30 @@ namespace CourseMicroservice.Web.Services
             authenticationProperties.StoreTokens(authenticationTokens);
 
             return authenticationProperties;
+        }
+
+        public async Task<TokenResponse> GetTokensByRefreshToken(string refreshToken)
+        {
+            var discoveryRequest = new DiscoveryDocumentRequest()
+            {
+                Address = identityOption.Address,
+                Policy = { RequireHttps = false }
+            };
+
+            httpClient.BaseAddress = new Uri(identityOption.Address);
+            var discoveryResponse = await httpClient.GetDiscoveryDocumentAsync(discoveryRequest);
+
+            if (discoveryResponse.IsError) throw new Exception($"Failed to retrieve discovery document: {discoveryResponse.Error}");
+
+            var tokenResponse = await httpClient.RequestRefreshTokenAsync(new RefreshTokenRequest()
+            {
+                Address = discoveryResponse.TokenEndpoint,
+                ClientId = identityOption.Web.ClientId,
+                ClientSecret = identityOption.Web.ClientSecret,
+                RefreshToken = refreshToken
+            });
+
+            return tokenResponse;
         }
     }
 }
