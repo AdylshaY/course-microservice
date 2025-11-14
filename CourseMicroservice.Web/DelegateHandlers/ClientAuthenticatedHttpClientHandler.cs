@@ -11,7 +11,7 @@ namespace CourseMicroservice.Web.DelegateHandlers
 
             var user = httpContextAccessor.HttpContext.User;
 
-            if (user is null || !user.Identity!.IsAuthenticated) return await base.SendAsync(request, cancellationToken);
+            if (user.Identity!.IsAuthenticated) return await base.SendAsync(request, cancellationToken);
 
             var tokenResponse = await tokenService.GetClientAccessToken();
 

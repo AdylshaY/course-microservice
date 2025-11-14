@@ -14,7 +14,7 @@ namespace CourseMicroservice.Shared.Extensions
 
             services.AddAuthentication().AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
             {
-                options.Authority = identityOptions.Address;
+                options.Authority = identityOptions!.Address;
                 options.Audience = identityOptions.Audience;
                 options.RequireHttpsMetadata = false;
 
@@ -24,12 +24,12 @@ namespace CourseMicroservice.Shared.Extensions
                     ValidateIssuerSigningKey = true,
                     ValidateLifetime = true,
                     ValidateIssuer = true,
-                    RoleClaimType = "roles",
-                    NameClaimType = "preferred_username"
+                    RoleClaimType = ClaimTypes.Role,
+                    NameClaimType = ClaimTypes.NameIdentifier
                 };
             }).AddJwtBearer("ClientCredentialSchema", options =>
             {
-                options.Authority = identityOptions.Address;
+                options.Authority = identityOptions!.Address;
                 options.Audience = identityOptions.Audience;
                 options.RequireHttpsMetadata = false;
 
@@ -48,7 +48,6 @@ namespace CourseMicroservice.Shared.Extensions
                 {
                     policy.AddAuthenticationSchemes("ClientCredentialSchema");
                     policy.RequireAuthenticatedUser();
-                    policy.RequireClaim("client_id");
                 })
                 .AddPolicy("Password", policy =>
                 {

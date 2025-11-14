@@ -21,7 +21,7 @@ builder.Services.AddMasstransitExtension(builder.Configuration);
 var app = builder.Build();
 
 
-app.AddSeedDataExtension().ContinueWith(x =>
+await app.AddSeedDataExtension().ContinueWith(x =>
 {
     Console.WriteLine(x.IsFaulted ? x.Exception.Message : "Seed data has been saved successfully.");
 });

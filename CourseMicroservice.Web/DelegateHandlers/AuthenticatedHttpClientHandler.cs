@@ -24,7 +24,7 @@ namespace CourseMicroservice.Web.DelegateHandlers
 
             var response = await base.SendAsync(request, cancellationToken);
 
-            if (response.StatusCode != HttpStatusCode.Unauthorized) return await base.SendAsync(request, cancellationToken);
+            if (response.StatusCode != HttpStatusCode.Unauthorized) return response;
 
             var refreshToken = await httpContextAccessor.HttpContext.GetTokenAsync(OpenIdConnectParameterNames.RefreshToken);
 
