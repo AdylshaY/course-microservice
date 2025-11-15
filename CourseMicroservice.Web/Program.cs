@@ -22,7 +22,7 @@ builder.Services.AddOptionsExtension();
 
 builder.Services.AddHttpClient<SignUpService>();
 builder.Services.AddHttpClient<SignInService>();
-builder.Services.AddHttpClient<TokenService>();
+builder.Services.AddScoped<TokenService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<CatalogService>();
 

@@ -5,7 +5,8 @@
         public static RouteGroupBuilder DeleteCourseGroupItemEndpoint(this RouteGroupBuilder group)
         {
             group.MapDelete("/{id:guid}", async (IMediator mediator, Guid id) => (await mediator.Send(new DeleteCourseCommand(id))).ToGenericResult())
-                .WithName("DeleteCourse");
+                .WithName("DeleteCourse")
+                .RequireAuthorization(policyNames: "InstructorPolicy");
 
             return group;
         }

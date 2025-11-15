@@ -7,7 +7,7 @@ using System.Security.Claims;
 
 namespace CourseMicroservice.Web.Services
 {
-    public class TokenService(HttpClient httpClient, IdentityOption identityOption)
+    public class TokenService(IHttpClientFactory httpClientFactory, IdentityOption identityOption)
     {
         public List<Claim> ExtractClaims(string accessToken)
         {
@@ -44,6 +44,7 @@ namespace CourseMicroservice.Web.Services
                 Policy = { RequireHttps = false }
             };
 
+            var httpClient = httpClientFactory.CreateClient("GetTokensByRefreshToken");
             httpClient.BaseAddress = new Uri(identityOption.Address);
             var discoveryResponse = await httpClient.GetDiscoveryDocumentAsync(discoveryRequest);
 
@@ -68,6 +69,7 @@ namespace CourseMicroservice.Web.Services
                 Policy = { RequireHttps = false }
             };
 
+            var httpClient = httpClientFactory.CreateClient("GetClientAccessToken");
             httpClient.BaseAddress = new Uri(identityOption.Address);
             var discoveryResponse = await httpClient.GetDiscoveryDocumentAsync(discoveryRequest);
 

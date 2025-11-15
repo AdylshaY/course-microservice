@@ -54,6 +54,13 @@ namespace CourseMicroservice.Shared.Extensions
                     policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
                     policy.RequireAuthenticatedUser();
                     policy.RequireClaim(ClaimTypes.Email);
+                })
+                .AddPolicy("InstructorPolicy", policy =>
+                {
+                    policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
+                    policy.RequireAuthenticatedUser();
+                    policy.RequireClaim(ClaimTypes.Email);
+                    policy.RequireRole(ClaimTypes.Role, "instructor");
                 });
 
             return services;

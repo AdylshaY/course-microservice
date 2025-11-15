@@ -11,7 +11,8 @@ namespace CourseMicroservice.Catalog.API.Features.Courses.Create
                 .WithName("CreateCourse")
                 .Produces<CreateCourseResponse>(StatusCodes.Status201Created)
                 .AddEndpointFilter<ValidationFilter<CreateCourseCommand>>()
-                .DisableAntiforgery();
+                .DisableAntiforgery()
+                .RequireAuthorization(policyNames: "InstructorPolicy");
 
             return group;
         }
