@@ -6,7 +6,6 @@ using CourseMicroservice.Web.Pages.Auth.SignUp;
 using CourseMicroservice.Web.Services;
 using CourseMicroservice.Web.Services.Refit;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.Extensions.Configuration;
 using Refit;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,8 +22,9 @@ builder.Services.AddOptionsExtension();
 builder.Services.AddHttpClient<SignUpService>();
 builder.Services.AddHttpClient<SignInService>();
 builder.Services.AddScoped<TokenService>();
-builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<CatalogService>();
+builder.Services.AddScoped<UserService>();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<AuthenticatedHttpClientHandler>();
 builder.Services.AddScoped<ClientAuthenticatedHttpClientHandler>();

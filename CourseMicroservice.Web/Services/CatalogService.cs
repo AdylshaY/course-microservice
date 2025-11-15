@@ -1,13 +1,12 @@
 ﻿using CourseMicroservice.Web.Pages.Instructor.ViewModels;
 using CourseMicroservice.Web.Services.Refit;
-using Microsoft.AspNetCore.Mvc;
 using Refit;
 using System.Text.Json;
 using ProblemDetails = Microsoft.AspNetCore.Mvc.ProblemDetails;
 
 namespace CourseMicroservice.Web.Services
 {
-    public class CatalogService(ICatalogRefitService catalogRefitService, ILogger<CatalogService> logger)
+    public class CatalogService(ICatalogRefitService catalogRefitService, ILogger<CatalogService> logger, UserService userService)
     {
         public async Task<ServiceResult<List<CategoryViewModel>>> GetCategoriesAsync()
         {
@@ -43,6 +42,33 @@ namespace CourseMicroservice.Web.Services
             }
 
             return ServiceResult.Success();
+        }
+
+        public async Task<ServiceResult<List<CourseViewModel>>> GetCourseListByUserId()
+        {
+            var courseList = await catalogRefitService.GetCourseListByUserId(userService.UserId);
+
+            if (!courseList.IsSuccessStatusCode)
+            {
+                var problemDetails = JsonSerializer.Deserialize<ProblemDetails>(courseList.Error.Content!);
+                logger.LogError("Error occurred while fetching courses for user {UserId}: {Error}", userService.UserId, problemDetails!.Title);
+                return ServiceResult<List<CourseViewModel>>.Error(problemDetails!);
+            }
+
+            var courses = courseList.Content!.Select(x => new CourseViewModel(
+                x.Id,
+                x.Name,
+                x.Description,
+                x.Price,
+                x.ImageUrl,
+                x.Created.ToLongDateString(),
+                x.Feature.EducatorFullName,
+                x.Category.Name,
+                x.Feature.Duration,
+                x.Feature.Rating
+            )).ToList();
+
+            return ServiceResult<List<CourseViewModel>>.SuccessAsOk(courses);
         }
     }
 }

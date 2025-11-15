@@ -1,9 +1,10 @@
 ﻿
 using CourseMicroservice.Bus.Commands;
+using CourseMicroservice.Shared.Services;
 
 namespace CourseMicroservice.Catalog.API.Features.Courses.Create
 {
-    public class CreateCourseCommandHandler(AppDbContext context, IMapper mapper, IPublishEndpoint publishEndpoint) : IRequestHandler<CreateCourseCommand, ServiceResult<CreateCourseResponse>>
+    public class CreateCourseCommandHandler(AppDbContext context, IMapper mapper, IPublishEndpoint publishEndpoint, IIdentityService identityService) : IRequestHandler<CreateCourseCommand, ServiceResult<CreateCourseResponse>>
     {
         public async Task<ServiceResult<CreateCourseResponse>> Handle(CreateCourseCommand request, CancellationToken cancellationToken)
         {
@@ -24,10 +25,11 @@ namespace CourseMicroservice.Catalog.API.Features.Courses.Create
             var newCourse = mapper.Map<Course>(request);
             newCourse.Created = DateTime.Now;
             newCourse.Id = NewId.NextSequentialGuid();
+            newCourse.UserId = identityService.UserId;
             newCourse.Feature = new Feature()
             {
                 Duration = 10, // Calculate by course video
-                EducatorFullName = "Adylsha Yumayev", // Get by token payload
+                EducatorFullName = identityService.UserName,
                 Rating = 0
             };
 
