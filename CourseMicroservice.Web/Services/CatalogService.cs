@@ -70,5 +70,17 @@ namespace CourseMicroservice.Web.Services
 
             return ServiceResult<List<CourseViewModel>>.SuccessAsOk(courses);
         }
+
+        public async Task<ServiceResult> DeleteCourseByCourseIdAsync(Guid courseId)
+        {
+            var response = await catalogRefitService.DeleteCourseAsync(courseId);
+            if (!response.IsSuccessStatusCode)
+            {
+                var problemDetails = JsonSerializer.Deserialize<ProblemDetails>(response.Error.Content!);
+                logger.LogError("Error occurred while deleting course {CourseId}: {Error}", courseId, problemDetails!.Title);
+                return ServiceResult.Error(problemDetails!);
+            }
+            return ServiceResult.Success();
+        }
     }
 }
