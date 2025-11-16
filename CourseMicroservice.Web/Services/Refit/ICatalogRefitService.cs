@@ -5,6 +5,12 @@ namespace CourseMicroservice.Web.Services.Refit
 {
     public interface ICatalogRefitService
     {
+        [Get("/api/v1/courses")]
+        Task<ApiResponse<List<CourseDto>>> GetAllCourses();
+
+        [Get("/api/v1/courses/{id}")]
+        Task<ApiResponse<CourseDto>> GetCourse(Guid id);
+
         [Get("/api/v1/categories")]
         Task<ApiResponse<List<CategoryDto>>> GetCategoriesListAsync();
 

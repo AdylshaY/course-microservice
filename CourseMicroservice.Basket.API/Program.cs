@@ -21,6 +21,8 @@ builder.Services.AddMasstransitExtension(builder.Configuration);
 
 var app = builder.Build();
 
+app.UseExceptionHandler(x => { });
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

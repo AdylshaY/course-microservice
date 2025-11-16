@@ -35,6 +35,8 @@ builder.Services.AddHostedService<CheckPaymentStatusOrderBackgroundService>();
 
 var app = builder.Build();
 
+app.UseExceptionHandler(x => { });
+
 app.AddOrderGroupEndpointExtension(app.AddVersionSetExtension());
 
 if (app.Environment.IsDevelopment())

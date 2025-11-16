@@ -23,6 +23,8 @@ builder.Services.AddCommonMasstransitExtension(builder.Configuration);
 
 var app = builder.Build();
 
+app.UseExceptionHandler(x => { });
+
 app.AddPaymentGroupEndpointExtension(app.AddVersionSetExtension());
 
 if (app.Environment.IsDevelopment())

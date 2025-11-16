@@ -25,6 +25,8 @@ builder.Services.AddHttpClient<SignInService>();
 builder.Services.AddScoped<TokenService>();
 builder.Services.AddScoped<CatalogService>();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<BasketService>();
+builder.Services.AddScoped<OrderService>();
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<AuthenticatedHttpClientHandler>();
@@ -35,6 +37,25 @@ builder.Services.AddRefitClient<ICatalogRefitService>().ConfigureHttpClient(cfg 
 {
     var microserviceOption = builder.Configuration.GetSection(nameof(MicroserviceOption)).Get<MicroserviceOption>();
     cfg.BaseAddress = new Uri(microserviceOption!.Catalog.BaseAddress);
+}).AddHttpMessageHandler<AuthenticatedHttpClientHandler>().AddHttpMessageHandler<ClientAuthenticatedHttpClientHandler>();
+
+builder.Services.AddRefitClient<IBasketRefitService>().ConfigureHttpClient(configure =>
+{
+    var microserviceOption = builder.Configuration.GetSection(nameof(MicroserviceOption)).Get<MicroserviceOption>();
+    configure.BaseAddress = new Uri(microserviceOption!.Basket.BaseAddress);
+}).AddHttpMessageHandler<AuthenticatedHttpClientHandler>().AddHttpMessageHandler<ClientAuthenticatedHttpClientHandler>();
+
+builder.Services.AddRefitClient<IDiscountRefitService>().ConfigureHttpClient(configure =>
+{
+    var microserviceOption = builder.Configuration.GetSection(nameof(MicroserviceOption)).Get<MicroserviceOption>();
+    configure.BaseAddress = new Uri(microserviceOption!.Discount.BaseAddress);
+}).AddHttpMessageHandler<AuthenticatedHttpClientHandler>().AddHttpMessageHandler<ClientAuthenticatedHttpClientHandler>();
+
+
+builder.Services.AddRefitClient<IOrderRefitService>().ConfigureHttpClient(configure =>
+{
+    var microserviceOption = builder.Configuration.GetSection(nameof(MicroserviceOption)).Get<MicroserviceOption>();
+    configure.BaseAddress = new Uri(microserviceOption!.Order.BaseAddress);
 }).AddHttpMessageHandler<AuthenticatedHttpClientHandler>().AddHttpMessageHandler<ClientAuthenticatedHttpClientHandler>();
 
 builder.Services.AddAuthentication(configureOptions =>
@@ -54,11 +75,7 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Error");
-}
+app.UseExceptionHandler("/Error");
 
 app.UseRouting();
 

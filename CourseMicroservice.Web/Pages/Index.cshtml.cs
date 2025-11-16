@@ -1,20 +1,23 @@
 namespace CourseMicroservice.Web.Pages
 {
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc.RazorPages;
+    using CourseMicroservice.Web.PageModels;
+    using CourseMicroservice.Web.Pages.Instructor.ViewModels;
+    using CourseMicroservice.Web.Services;
+    using Microsoft.AspNetCore.Mvc;
+    using System.Threading.Tasks;
 
-    public class IndexModel : PageModel
+    public class IndexModel(CatalogService catalogService) : BasePageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        public List<CourseViewModel> Courses { get; set; } = [];
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public async Task<IActionResult> OnGet()
         {
-            _logger = logger;
-        }
+            var courseList = await catalogService.GetAllCoursesAsync();
+            if (courseList.IsFail) return ErrorPage(courseList);
 
-        public void OnGet()
-        {
+            Courses = courseList.Data!;
 
+            return Page();
         }
     }
 }

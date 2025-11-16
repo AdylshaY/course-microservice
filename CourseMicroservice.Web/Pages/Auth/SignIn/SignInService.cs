@@ -58,6 +58,7 @@ namespace CourseMicroservice.Web.Pages.Auth.SignIn
                 ClientSecret = identityOption.Web.ClientSecret,
                 UserName = signInViewModel.Email,
                 Password = signInViewModel.Password,
+                Scope = "offline_access",
             });
 
             if (tokenResponse.IsError || string.IsNullOrEmpty(tokenResponse.AccessToken)) throw new Exception($"Failed to retrieve token: {tokenResponse.Error}");

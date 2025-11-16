@@ -20,6 +20,7 @@ builder.Services.AddMasstransitExtension(builder.Configuration);
 
 var app = builder.Build();
 
+app.UseExceptionHandler(x => { });
 
 await app.AddSeedDataExtension().ContinueWith(x =>
 {

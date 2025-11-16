@@ -1,10 +1,18 @@
 ﻿namespace CourseMicroservice.Web.Services
 {
+    using global::Refit;
     using Microsoft.AspNetCore.Mvc;
+    using System.Text.Json;
     using System.Text.Json.Serialization;
+    using ProblemDetails = Microsoft.AspNetCore.Mvc.ProblemDetails;
 
     public class ServiceResult
     {
+        private static JsonSerializerOptions JsonSerializerOptions => new()
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
+
         public ProblemDetails? Fail { get; set; }
 
         [JsonIgnore]
@@ -49,13 +57,35 @@
                 }
             };
         }
+
+        public static ServiceResult FailFromProblemDetails(ApiException exception)
+        {
+            if (string.IsNullOrEmpty(exception.Content))
+                return new ServiceResult
+                {
+                    Fail = new ProblemDetails
+                    {
+                        Title = exception.Message
+                    }
+                };
+
+            return new ServiceResult
+            {
+                Fail = JsonSerializer.Deserialize<ProblemDetails>(exception.Content, JsonSerializerOptions)
+            };
+        }
     }
 
     public class ServiceResult<T> : ServiceResult
     {
+        private static JsonSerializerOptions JsonSerializerOptions => new()
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
+
         public T? Data { get; set; }
 
-        public static ServiceResult<T> SuccessAsOk(T data)
+        public static ServiceResult<T> Success(T data)
         {
             return new ServiceResult<T> { Data = data };
         }
@@ -85,6 +115,23 @@
                 {
                     Title = title,
                 }
+            };
+        }
+
+        public static new ServiceResult<T> FailFromProblemDetails(ApiException exception)
+        {
+            if (string.IsNullOrEmpty(exception.Content))
+                return new ServiceResult<T>
+                {
+                    Fail = new ProblemDetails
+                    {
+                        Title = exception.Message
+                    }
+                };
+
+            return new ServiceResult<T>
+            {
+                Fail = JsonSerializer.Deserialize<ProblemDetails>(exception.Content, JsonSerializerOptions)
             };
         }
     }

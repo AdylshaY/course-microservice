@@ -1,8 +1,10 @@
 ﻿using CourseMicroservice.Web.Services;
 using Duende.IdentityModel.Client;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using System.Net;
+using System.Security.Claims;
 
 namespace CourseMicroservice.Web.DelegateHandlers
 {
@@ -34,7 +36,16 @@ namespace CourseMicroservice.Web.DelegateHandlers
 
             if (tokenResponse.IsError || string.IsNullOrEmpty(tokenResponse.AccessToken)) throw new UnauthorizedAccessException("Failed to refresh access token.");
 
-            // TODO: Update the authentication cookies with the new tokens here if necessary.
+            var authenticationProperties = tokenService.CreateAuthenticationProperties(tokenResponse);
+            var userClaim = httpContextAccessor.HttpContext.User.Claims;
+
+            var claimIdentity = new ClaimsIdentity(userClaim, CookieAuthenticationDefaults.AuthenticationScheme,
+                ClaimTypes.Name, ClaimTypes.Role);
+
+            var claimsPrincipal = new ClaimsPrincipal(claimIdentity);
+
+            await httpContextAccessor.HttpContext!.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                claimsPrincipal, authenticationProperties);
 
             request.SetBearerToken(tokenResponse.AccessToken);
 

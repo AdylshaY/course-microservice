@@ -18,6 +18,8 @@ builder.Services.AddMasstransitExtension(builder.Configuration);
 
 var app = builder.Build();
 
+app.UseExceptionHandler(x => { });
+
 app.UseStaticFiles();
 
 app.AddFileGroupEndpointExtension(app.AddVersionSetExtension());

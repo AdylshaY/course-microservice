@@ -24,7 +24,7 @@
 
             var client = httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(identityOptions.Address);
-            var discoveryResponse = await client.GetDiscoveryDocumentAsync(discoveryRequest);
+            var discoveryResponse = await client.GetDiscoveryDocumentAsync(discoveryRequest, cancellationToken);
 
             if (discoveryResponse.IsError)
             {
