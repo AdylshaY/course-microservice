@@ -1,4 +1,5 @@
 using CourseMicroservice.Web.DelegateHandlers;
+using CourseMicroservice.Web.ExceptionHandlers;
 using CourseMicroservice.Web.Extensions;
 using CourseMicroservice.Web.Options;
 using CourseMicroservice.Web.Pages.Auth.SignIn;
@@ -28,6 +29,7 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<AuthenticatedHttpClientHandler>();
 builder.Services.AddScoped<ClientAuthenticatedHttpClientHandler>();
+builder.Services.AddExceptionHandler<UnauthorizedAccessExceptionHandler>();
 
 builder.Services.AddRefitClient<ICatalogRefitService>().ConfigureHttpClient(cfg =>
 {
